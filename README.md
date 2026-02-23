@@ -1,2 +1,3 @@
-# NotesOnGroupTheoryForPhysics
-Some notes I wrote for the course of Group Theory for Physics, held by professor Ken Konishi during the academic year 2025/2026
+# Notes on Geometry and Linear Algebra
+These are some notes I rewrote in LaTeX on topics in Geometry and Linear Algebra. In the final chapter, I included my solutions to the exercises I proposed throughout the notes—these are problems my professor recommended to help deepen our intuition and understanding of the subject.
+

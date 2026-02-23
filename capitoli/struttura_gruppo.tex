@@ -1,0 +1,40 @@
+\chapter{Gruppi e algebre di Lie}
+
+Molti dei gruppi che compaiono in Fisica hanno una struttura continua: si pensi a $\text{SO}(3)$, $\text{SO}(4)$, $\text{SU}(2)$ e $\text{SU}(4)$, i cui
+elementi dipendono da un set continuo di variabili che variano su un intervallo. Quello che caratterizza i gruppi di Lie, tuttavia, è il fatto di possedere una funzione
+differenziabile che lega 
+\begin{definition}[gruppo di Lie]
+    Sia $(G, \circ)$ un gruppo continuo, i cui elementi sono indicati da un insieme di parametri continui $\{ \alpha \} = \{ \alpha_1, \ldots, \alpha_n \}$ ovvero
+    \begin{equation}
+        A \in G, A = A(\alpha) = A(\alpha_1, \ldots, \alpha_n)
+    \end{equation}
+    per cui risulti che
+    \begin{equation}
+        e = A(\mathbf{0}) = A(0, \ldots, 0),
+    \end{equation}
+    con le seguenti proprietà:
+    \begin{enumerate}[label=\protect\circled{\arabic*}]
+        \item \textbf{chiusura}:
+        \begin{equation}
+            A(\alpha) \circ A(\beta) = A(\gamma),
+        \end{equation}
+        dove $\gamma = f(\alpha, \beta)$ con $f$ funzione differenziabile tale che
+        \begin{equation}
+            f(0, \alpha) = \alpha, f(\beta, 0) = \beta;
+        \end{equation}
+        \item \textbf{inversa}:
+        \begin{equation}
+            (A(\alpha))^{-1} = A(\alpha'),
+        \end{equation}
+        dove $\alpha' = g(\alpha)$ è una funzione differenziabile in $\alpha$;
+        \item \textbf{associatività}:
+        \begin{equation}
+            A(\alpha) \, \circ \, (A(\beta) \, \circ \, A(\gamma)) = (A(\alpha) \, \circ \, A(\beta)) \, \circ \, A(\gamma),
+        \end{equation}
+        che implica che
+        \begin{equation}
+            f(\alpha, f(\beta, \gamma)) = f(f(\alpha, \beta), \gamma).
+        \end{equation}
+    \end{enumerate}
+    Allora diremo che $G$ è un gruppo di Lie.
+\end{definition}
