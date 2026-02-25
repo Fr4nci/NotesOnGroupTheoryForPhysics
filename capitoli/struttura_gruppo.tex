@@ -38,3 +38,40 @@ differenziabile che lega
     \end{enumerate}
     Allora diremo che $G$ è un gruppo di Lie.
 \end{definition}
+
+Uno dei risultati sicuramente più importanti sui gruppi di Lie si ha introducendo le misura di Haar, che definiamo come
+\begin{definition}[misura di Haar]
+    Sia $(G, \circ)$ un gruppo, diremo che $dg$ è una misura di Haar se
+    \begin{enumerate}[label=\protect\circled{\arabic*}]
+        \item \textbf{normalizzazione:} 
+        \begin{equation}
+            \int_G dg = 1,
+        \end{equation}
+        \item $\forall b \in \mathbb{R}$,
+        \begin{equation}
+            \int_G dg bf(g) = b \int_G dg f(g),
+        \end{equation}
+        \item se $\forall g \in G, f(g) \geq 0$ allora
+        \begin{equation}
+            \int_G dg f(g) \geq 0,
+        \end{equation}
+        \item \textbf{linearità:} se $a, b \in \mathbb{R}$
+        \begin{equation}
+            \int_G dg (af_1(g) + b f_2(g)) = a \int_G dg f_1(g) + b \int_G dg f_2(g).
+        \end{equation}
+        \item \textbf{invariante a destra e sinistra:} se $a \in G$, allora
+        \begin{align}
+            \int_G dg f(a \circ g)  = \int_G f(g) = \int_G dg f(g \circ a),
+        \end{align}
+        e
+        \begin{align}
+            \int_G dg^{-1} f(g) = \int_G f(g).
+        \end{align}
+    \end{enumerate}
+\end{definition}
+
+Vale che
+\begin{theorem}
+    Se $(G, \circ)$ è un gruppo di Lie \textbf{compatto}, allora $\exists$ una misura invariante di Haar.
+\end{theorem}
+Non daremo una dimostrazione di questo fatto, tuttavia ci concentreremo nel fornire alcuni esempi.

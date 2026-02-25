@@ -405,7 +405,7 @@ Un altro possibile esempio di mappa di rivestimento è quello di rappresentato d
     \caption{La mappa di rivestimento $p: \mathbb{R} \to S^1$. La retta reale $\mathbb{R}$ si avvolge a spirale infinite volte attorno alla circonferenza. L'intorno aperto $U$ ha come controimmagine infiniti aperti disgiunti $V_k$.}
 \end{figure}
 
-\section{Classificazione dei gruppi}
+\section{Classificazione dei gruppi e sottogruppi}
 
 Torniamo adesso ai gruppi: osserviamo che gli assiomi di gruppo non garantiscono la proprietà commutativo, quindi, se $(G_1, \circ)$ è un gruppo, allpresi $g_1, g_2 \in G$ generalmente si ha che
 \begin{equation}
@@ -504,6 +504,98 @@ Siccome i gruppi sono spazi topologici, si può dare anche la nozione di compatt
 	Vediamo che questa è l'unica tabella commutativa permessa, poiché altrimenti avremmo un assurdo
 \end{proof}
 
+\subsection{Sottogruppi e coset}
+
+Come abbiamo fatto negli spazi vettoriali, in cui dato uno $\mathbb{K}-$spazio vettoriale $V$ ci siamo soffermati nello studio dei sottospazi, ovvero dei sottoinsiemi di $V$ che
+possiedono la struttura di spazio vettoriale con la legge di composizione interna ed esterna di $V$, vogliamo adesso studiare degli insiemi di $(G, \circ)$ gruppo che sono ancora dei
+gruppi rispetto alla $\circ$. Diremo che questi insiemi sono dei \emph{sottogruppi}
+
+\begin{definition}[sottogruppi]
+	Sia $(G, \circ)$ un gruppo, diremo che $H \subseteq G$ è un sottogruppo di $G$ se
+	\begin{enumerate}[label=\protect\circled{\arabic*}]
+		\item $\{ h_i \} \in G$;
+		\item $\forall i, j, h_i \circ h_j \in H$ e $e \in H$.
+	\end{enumerate}
+\end{definition}
+\begin{remark}
+	Questa definizione è perfettamente equivalente a dire che $(H, \circ)$ è un gruppo (in maniera simile a quando dicevamo che $W \subseteq V$ spazio vettoriale è sottospazio di $V \iff \forall \alpha, \beta \in \mathbb{K}, \forall \underline{v}, \underline{w} \in W, \alpha \cdot_ V \underline{v} +_V \beta \cdot_V \underline{w} \in W$.)
+\end{remark}
+\begin{remark}
+	Chiaramente $\{ e \} = H$ e $H = G$ sono i sottogruppi banali.
+\end{remark}
+
+\textbf{Notazione:} quando scriveremo $H$, salvo espresso diversamente, intenderemo sempre un sottogruppo non banale.
+
+Una tipologia di sottogruppo molto importante sono quelli \emph{invarianti}
+
+\begin{definition}[sottogruppo invariante]
+	Sia $(G, \circ)$ un gruppo, diremo che $H \subseteq G$ è un sottogruppo invariante se
+	\begin{equation}
+		\forall g_i \in G, \forall h_k \in H, g_i h_k g_i^{-1} \in H,
+	\end{equation}
+	oppure in forma più simbolica
+	\begin{equation}
+		\forall g_i \in G, g_i H g_i^{-1} \in H
+	\end{equation}
+\end{definition}
+
+In base alla presenza o meno di sottogruppi invarianti, è possibile andare a categorizzare ulteriormente i gruppi
+
+\begin{definition}[gruppo semplice e semi-semplice]
+	Sia $(G, \circ)$ un gruppo, diremo che
+	\begin{enumerate}[label=\protect\circled{\arabic*}]
+		\item diremo che $G$ è un gruppo \textbf{semplice} se è un gruppo \underline{senza} un sottogruppo invariante;
+		\item diremo che $G$ è un gruppo \textbf{semi-semplice} se è un gruppo \underline{senza} un sottospazio invariante abeliano.
+	\end{enumerate}
+\end{definition}
+\begin{remark}
+	Chiaramente si ha che
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\draw[fill=white, thick] (0, 2.5) ellipse (4cm and 1.8cm);
+			\node[font=\normalsize] at (0, 4.5) {gruppi semi-semplici};
+			\draw[fill=white, thick] (0, 2.5) ellipse (2cm and 0.9 cm);
+			\node[font=\normalsize] at (0, 3.6) {gruppi semplici};
+		\end{tikzpicture}
+		\caption{Relazione insiemistica fra gruppi semplici e semi-semplici}
+	\end{figure}
+\end{remark}
+
+Un altro oggetto molto importante, che possiamo definire a partire da un sottogruppo è il concetto di \emph{coset}
+\begin{definition}[coset]
+	Sia $(G, \circ)$ un gruppo,sia $g_i \in G$ e sia $H \subset G$ un sottogruppo, diremo che il coset sinistro di $H$ con \emph{rappresentante} $g_i$ è l'insieme degli elementi dati da
+	\begin{equation}
+		g_i \, \circ \, H. 
+	\end{equation}
+	L'insieme di tutti i coset è indicato con $G \, \backslash \, H$.
+\end{definition}
+\begin{remark}
+	In pratica, stiamo vedendo gli elementi della forma $g_1 \circ h_1, g_1 \circ h_2, \ldots$ come il medesimo elemento, ovvero il coset di $H$ con rappresentante $g_i$: si potrebbe dare una definizione alternativa
+	tramite relazione d'equivalenza dicendo che
+	$$
+		g_i \sim_H g_j \iff g_i^{-1} g_j \in H \iff g_j \in g_i H 
+	$$
+\end{remark}
+
+\begin{remark}
+	Si potrebbe definire anche il coset destro (noi sopra abbiamo fatto quello sinistro), come l'insieme degli elementi, fissato $g_i \in G$, della forma
+	\begin{equation}
+		H \, \circ \, g_i.
+	\end{equation}
+\end{remark}
+
+Solitamente il coset non ha una struttura di gruppo rispetto a $\circ$, tuttavia si può mostrare che
+\begin{prop} \label{prop:sott_inv_coset_grupp}
+	Sia $(G, \circ)$ un gruppo e sia $H \subseteq G$ un sottogruppo invariante, allora $\equivcls{G}{H}$ è un gruppo rispetto a $\circ$
+\end{prop} 
+\begin{proof}
+	Si ha infatti che presi $g_1 \circ H$ e $g_2 \circ H$ allora, essendo $H$ un sottogruppo invariante
+	\begin{equation}
+		g_1 \circ H \circ g_2 \circ H \stackrel{e = g_2 \circ g_2^{-1}}{=} g_1 \circ g_2 \circ \underbrace{g_2^{-1} H \circ g_2}_{\in H} H = g_1 \circ g_2 \circ H.
+	\end{equation}
+\end{proof}
+
 \section{Omomorfismi}
 
 Vogliamo analizzare, adesso, una classe di mappe fra gruppi molto importanti, che rispettano la struttura algebrica del gruppo. Prima di definire esplicitamente cosa siano, vediamo una situazione generale:
@@ -555,6 +647,21 @@ Possiamo introdurre, similmente a come avevamo fatto per le applicazioni lineari
 		\text{Ker}(f) = \{ g_1 \in G_1 : f(g_1) = e_2 \}.
 	\end{equation}
 \end{definition}
+\begin{prop}
+	$\text{Ker}(f)$ è un sottospazio invariante.
+\end{prop}
+\begin{proof}
+\begin{align}
+	&g^{-1} \circ_1 \text{Ker}(f) \circ_1 g \mapsto f(g^{-1}) \circ_2 f(\text{Ker}(f)) \circ_2 f(g) = (f(g))^{-1} \circ_2 e_2 \circ_2 f(g) = e_2 \implies \nonumber \\
+	&\implies g^{-1} \circ (\text{Ker}(f)) \circ g \in \text{Ker}(f). 
+\end{align}
+\end{proof}
+\begin{cor} \label{cor:g_ker_grupp}
+	$\equivcls{G}{\, \text{Ker}(f)}$ è un gruppo rispetto a $\circ_G$.
+\end{cor}
+\begin{proof}
+	E' sufficiente usare la \ref{prop:sott_inv_coset_grupp}.
+\end{proof}
 
 Tramite il kernel è possibile mostrare il seguente teorema
 
@@ -565,34 +672,34 @@ Tramite il kernel è possibile mostrare il seguente teorema
     \end{equation}
 \end{theorem}
 
-Per fare questa dimostrazione è necessario il seguente lemma:
-\begin{lemma} \label{lemma:eq_coset_ker}
-	Sia $K$ il kernel di un omomorfismo $f: G_1 \to G_2$ con $(G_1, \circ_1)$ e $(G_2, \circ_2)$ due gruppi, allora $\forall a \in G_1$
-	\begin{equation}
-		aK = Ka.
-	\end{equation}
-\end{lemma}
-\begin{proof}
-	La dimostrazione verte nel far vedere che $aK \subseteq Ka$ e $Ka \subseteq aK$. Partiamo con la prima \\
-	$\boxed{\subseteq}:$ sia $a \, \circ_1 \, k \in aK$, con $k \in K$, allora si ha che
-	\begin{equation}
-		f(a \, \circ_1 \, k \, \circ_1 \, a^{-1}) = f(a) \, \circ_2 \, f(k) \, \circ_2 \, f(a^{-1}) = f(a) \circ_2 (f(a))^{-1} = e_2,
-	\end{equation}
-	dunque $a \, \circ_1 k \, \circ_1 a^{-1} \in \text{Ker}(f),$ dunque $\exists k' \in K$ tale che
-	\begin{equation}
-		a \, \circ_1 k \, \circ_1 a^{-1} = k' \implies a \, \circ_1 k \, \circ_1 a^{-1} \, \circ_1 \, a = k' \, \circ_1 \, a,
-	\end{equation}
-	dunque $aK \subseteq Ka$. \\
-	$\boxed{\supseteq}:$ sia $k \, \circ \, a \in Ka, k \in K$, allora si ha che
-	\begin{equation}
-		f(a^{-1} \, \circ_1 \, k \, \circ_1 \, a) = f(a^{-1}) \, \circ_2 \, f(k) \, \circ_2 \, f(a) = e_2,
-	\end{equation}
-	dunque $a^{-1} \, \circ_1 k \, \circ_1 \, a \in \text{Ker}(f)$, dunque $\exists k' \in K$ tale che
-	\begin{equation}
-		a^{-1} \, \circ_1 k \, \circ_1 \, a = k' \implies a \, \circ_1 a^{-1} \, \circ_1 k \, \circ_1 \, a = a \, \circ_1 \, k' \implies k \, \circ_1 \, a = a \, \circ_1 \, k',
-	\end{equation}
-	quindi $Ka \subseteq aK$.
-\end{proof}
+% Per fare questa dimostrazione è necessario il seguente lemma:
+% \begin{lemma} \label{lemma:eq_coset_ker}
+% 	Sia $K$ il kernel di un omomorfismo $f: G_1 \to G_2$ con $(G_1, \circ_1)$ e $(G_2, \circ_2)$ due gruppi, allora $\forall a \in G_1$
+% 	\begin{equation}
+% 		aK = Ka.
+% 	\end{equation}
+% \end{lemma}
+% \begin{proof}
+% 	La dimostrazione verte nel far vedere che $aK \subseteq Ka$ e $Ka \subseteq aK$. Partiamo con la prima \\
+% 	$\boxed{\subseteq}:$ sia $a \, \circ_1 \, k \in aK$, con $k \in K$, allora si ha che
+% 	\begin{equation}
+% 		f(a \, \circ_1 \, k \, \circ_1 \, a^{-1}) = f(a) \, \circ_2 \, f(k) \, \circ_2 \, f(a^{-1}) = f(a) \circ_2 (f(a))^{-1} = e_2,
+% 	\end{equation}
+% 	dunque $a \, \circ_1 k \, \circ_1 a^{-1} \in \text{Ker}(f),$ dunque $\exists k' \in K$ tale che
+% 	\begin{equation}
+% 		a \, \circ_1 k \, \circ_1 a^{-1} = k' \implies a \, \circ_1 k \, \circ_1 a^{-1} \, \circ_1 \, a = k' \, \circ_1 \, a,
+% 	\end{equation}
+% 	dunque $aK \subseteq Ka$. \\
+% 	$\boxed{\supseteq}:$ sia $k \, \circ \, a \in Ka, k \in K$, allora si ha che
+% 	\begin{equation}
+% 		f(a^{-1} \, \circ_1 \, k \, \circ_1 \, a) = f(a^{-1}) \, \circ_2 \, f(k) \, \circ_2 \, f(a) = e_2,
+% 	\end{equation}
+% 	dunque $a^{-1} \, \circ_1 k \, \circ_1 \, a \in \text{Ker}(f)$, dunque $\exists k' \in K$ tale che
+% 	\begin{equation}
+% 		a^{-1} \, \circ_1 k \, \circ_1 \, a = k' \implies a \, \circ_1 a^{-1} \, \circ_1 k \, \circ_1 \, a = a \, \circ_1 \, k' \implies k \, \circ_1 \, a = a \, \circ_1 \, k',
+% 	\end{equation}
+% 	quindi $Ka \subseteq aK$.
+% \end{proof}
 \begin{proof}
     Sia $K = \text{Ker}(f)$. Si osserva che, se $a, a' \in G_1$ tali che $f(a) = f(a') = a^\star \in \text{Im}(f)$ allora
     \begin{equation}
@@ -611,10 +718,35 @@ Per fare questa dimostrazione è necessario il seguente lemma:
     
     Inoltre, la mappa è surgettiva su $\text{Im}(f)$: per definizione, $\forall b \in \text{Im}(f), \exists a \in G_1 : f(a) = b$, dunque $\exists aK \in G_1 / K : \bar{f}(aK) = b$.
 
-    Infine, la mappa conserva l'operazione di gruppo:
+    Infine, la mappa conserva l'operazione di gruppo: è sufficiente osservare che per la \ref{cor:g_ker_grupp} si ha che
     \begin{align}
-        \bar{f}(aK \circ_1 bK) \stackrel{\text{associat.}}{=}& \bar{f}(a \circ_1 (Kb) \, \circ_1 K) \stackrel{\text{lemma }\ref{lemma:eq_coset_ker}}{=} \bar{f}(a \, \circ_1 \, (bK) \, \circ_1 K) = \bar{f}(abK) = f(ab) = \nonumber \\
-		&= f(a)f(b) = \bar{f}(aK)\bar{f}(bK).
+        \bar{f}(aK \circ_1 bK) = \bar{f}(a \circ bK) = f(a \circ b) = f(a) \circ_2 f(b) = \bar{f}(aK) \circ_2 \bar{f}(bK).
     \end{align}
     Essendo biunivoca e un omomorfismo, $\bar{f}$ è un isomorfismo.
 \end{proof}
+
+Una particolare rilevante di isomorfismi è quello di \emph{automorfismo}, ovvero un isomorfismo da un gruppo in sé stesso. E' chiaro che l'insieme degli automorfismi sia un gruppo
+rispetto all'operazione di composizione: sia $(G, \cdot)$ un gruppo e siano $g_1, g_2 : G \to G$ automorfismi, allora è chiaro che la funzione $g_1 \cdot g_2 : G \to G$ è ben definita e preso $a, b \in G$ abbiamo che
+\begin{equation}
+	(g_1 \circ g_2)(a \cdot b) = g_1(g_2(a \cdot b)) = g_1(g_2(a) \cdot g_2(b)) = g_1(g_2(a)) \cdot g_1(g_2(b)) = (g_1 \circ g_2)(a) \cdot (g_1 \circ g_2)(b),
+\end{equation}
+altrettanto chiaro è il fatto che, in generale, abbiamo
+\begin{equation}
+	g_1 \circ g_2 \neq g_2 \circ g_1.
+\end{equation}
+\begin{definition}[automorfismo e insieme degli automorfismi]
+	Sia $(G, \circ)$ un gruppo e sia $f: G \to G$ un isomorfismo, diremo allora che $f$ è un automorfismo e indicheremo l'insieme degli automorfismi con $\text{Aut}(G)$. 
+\end{definition}
+
+Un automorfismo particolarmente rilevante è il concetto di \emph{automorfismo indotto}: sia $(G, \circ)$ un gruppo e sia $g \in G$ fissato, allora l'applicazione
+
+\begin{equation}
+	g \in G \mapsto h \, \circ \, g \,  \circ \, h^{-1} \in G,
+\end{equation}
+
+in quanto è suriettivo (preso $g \in G,$ allora abbiamo sicuramente che $h^{-1} \, \circ \, g \, \circ \, h$ è controimmagine di $g$) ed è iniettivo (siccome se $f(g_1) = f(g_2) \implies 
+h \, \circ \, g_1 \, \circ \, h^{-1} = h \, \circ \, g_2 \, \circ \, h^{-1} \implies g_1 \, \circ \, h^{-1} = g_2 \, \circ \, h^{-1} \implies g_1 = g_2$) e il fatto che sia un omomorfismo deriva dal fatto che
+
+\begin{equation}
+	g_1 \, \circ \, g_2 \mapsto h \, \circ \, g_1 \, \circ g_2 \, \circ \, h^{-1} = h \, \circ \, g_1 \, \circ \, h^{-1} \, \circ \, h \, \circ \, g_2 \, \circ \, h^{-1} = f(g_1) \, \circ \, f(g_2). 
+\end{equation}
