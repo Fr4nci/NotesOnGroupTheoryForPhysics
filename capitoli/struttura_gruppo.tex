@@ -75,3 +75,142 @@ Vale che
     Se $(G, \circ)$ è un gruppo di Lie \textbf{compatto}, allora $\exists$ una misura invariante di Haar.
 \end{theorem}
 Non daremo una dimostrazione di questo fatto, tuttavia ci concentreremo nel fornire alcuni esempi.
+\begin{example} \hspace{1cm} \\
+    \begin{enumerate}[label=\protect\circled{\arabic*}]
+        \item Si consideri il gruppo $(\mathbb{R}_{> 0}, \circ = \cdot)$: tale insieme è un gruppo siccome presi $x, y \in \mathbb{R}_{> 0}$ si ha che
+        \begin{equation}
+            x \circ y = x \cdot y \in \mathbb{R}_{> 0},
+        \end{equation}
+        inoltre si ha che soddisfa la richiesta di esistenza dell'elemento neutro (ovvero $1 \in \mathbb{R}_{> 0}$), di associatività (la moltiplicazione sui reali è chiaramente associativa)
+        e di esistenza di elemento inverso per ogni elemento del gruppo (preso $x \in \mathbb{R}_{> 0}$, allora $\frac{1}{x} \in \mathbb{R}_{> 0}$ e $x \circ \frac{1}{x} = 1$). Si osservi che questo gruppo \textbf{non} è compatto, tuttavia è
+        possibile trovare comunque una misura di Haar. Si osserva infatti che se $dg = dx$ non si ha una misura di Haar, siccome
+        \begin{equation}
+            \int_{\mathbb{R}_{> 0}} dg f(a \circ g) \stackrel{t = ax}{=} \frac{1}{a} \int_{\mathbb{R}_{> 0}} f(t) dt \neq \int_{\mathbb{R}_{> 0}} f(g)dg,  
+        \end{equation}
+        ma, in maniera ancora più drammatica si ha che,
+        \begin{equation}
+            \int_{\mathbb{R}_{> 0}} dx = +\infty,
+        \end{equation}
+        tuttavia, se $dg = \frac{dx}{x}$ allora
+        \begin{equation}
+            \int_{\mathbb{R}_{> 0}} dg f(a \circ g) \stackrel{t = ax}{=} \int_{\mathbb{R}_{> 0}} f(t) \frac{dt}{t}.
+        \end{equation}
+        \item Si consideri $\text{SO}(2)$: tale gruppo è compatto siccome i parametri dipendono da $\theta \in [0, 2 \pi]$, dunque il gruppo è compatto. Si ha che se $R = R(\theta) \in \text{SO}(2)$, allora $R(\theta_1) \circ R(\theta_2) = R(\theta_1 + \theta_2)$ e in questo caso si ha che $dg = \frac{1}{2 \pi} d\theta$, da cui è possibile mostrare che
+        \begin{equation}
+            \int_{\text{SO}(2)} dg f(g) = \int_{0}^{2 \pi} \frac{d\theta}{2 \pi} = 1.
+        \end{equation}
+        \item Si consideri il gruppo $\text{SU}(2)$. Una sua possibile parametrizzazione è data dalla matrice:
+            \begin{equation}
+                U = \begin{pmatrix}
+                    a & b \\
+                    -b^{\ast} & a^{\ast}
+                \end{pmatrix}
+            \end{equation}
+            con la condizione che $U^\dagger U = \mathbf{1}$ e $\det{U} = 1$. Si osserva che se poniamo:
+            \begin{equation}
+                \begin{cases}
+                    a = x_1 + i y_1 \\
+                    b = x_2 + i y_2
+                \end{cases}
+            \end{equation}
+            allora dalla condizione sul determinante segue immediatamente che:
+            \begin{equation}
+                x_1^2 + y_1^2 + x_2^2 + y_2^2 = 1,
+            \end{equation}
+            dunque si ha l'identificazione (a meno di un diffeomorfismo) $\text{SU}(2) \sim S^3$. 
+
+            Un modo per costruire la misura di Haar è osservare che possiamo parametrizzare questo gruppo con $3$ angoli. Una prima parametrizzazione utile per studiare il gruppo in termini di fasi e moduli è:
+            \begin{equation}
+                U = \begin{pmatrix}
+                    e^{i \frac{\alpha}{2}} \cos{\theta} & e^{i \frac{\beta}{2}} \sin{\theta} \\
+                    -e^{-i \frac{\beta}{2}} \sin{\theta} & e^{-i \frac{\alpha}{2}} \cos{\theta}
+                \end{pmatrix},
+            \end{equation}
+            dove i parametri variano negli intervalli $\theta \in \left[0, \frac{\pi}{2}\right]$, mentre $\alpha, \beta \in [0, 4\pi)$ per poter coprire in modo completo la varietà.
+
+            Tuttavia, per ricavare esplicitamente l'elemento di misura, risulta più comodo sfruttare direttamente la geometria di $S^3$. Se fossimo in $S^2$, avremmo che:
+            \begin{equation}
+                x_1^2 + x_2^2 + x_3^2 = 1 \implies d\Omega(S^2) = \sin{\theta} \, d\theta \, d\phi,
+            \end{equation}
+            dove $d\Omega(S^2)$ è l'elemento infinitesimo di superficie. Nel caso di $S^3$ la costruzione è analoga ma richiede un passo in più. Dalla condizione iniziale abbiamo che:
+            \begin{equation}
+                x_1^2 + y_1^2 + x_2^2 + y_2^2 = 1 \implies x_2^2 + y_1^2 + y_2^2 = 1 - x_1^2.
+            \end{equation}
+            Essendo la somma di quadrati non negativa, si deve avere $1 - x_1^2 \geq 0$, da cui $x_1^2 \leq 1$. Possiamo quindi porre:
+            \begin{equation}
+                x_1 = \cos{\theta} \quad \text{con } \theta \in [0, \pi].
+            \end{equation}
+            dove l'intervallo è limitato a $\pi$ per garantire l'iniettività ed evitare di ricoprire la sfera due volte. Ne consegue che:
+            \begin{equation}
+                x_2^2 + y_1^2 + y_2^2 = 1 - \cos^2{\theta} = \sin^2{\theta},
+            \end{equation}
+            e quindi la terna $(x_2, y_1, y_2)$ è costretta a "vivere" su una superficie sferica bidimensionale $S^2$ di raggio $\sin{\theta}$. Parametrizzando questa terna con le coordinate sferiche consuete, introduciamo due angoli $\alpha \in [0, \pi]$ e $\beta \in [0, 2\pi)$:
+            \begin{equation}
+                \begin{cases}
+                    x_2 = \sin{\theta} \sin{\alpha} \cos{\beta} \\
+                    y_1 = \sin{\theta} \sin{\alpha} \sin{\beta} \\
+                    y_2 = \sin{\theta} \cos{\alpha}
+                \end{cases}
+            \end{equation}
+            L'elemento di volume (ovvero la misura di Haar) su $S^3$ si costruisce combinando la variazione lungo $\theta$ con l'elemento d'area della sfera di raggio $\sin{\theta}$:
+            \begin{equation}
+                d\Omega(S^3) = \sin^2{\theta} \, d\theta \, d\Omega(S^2).
+            \end{equation}
+            Sostituendo l'espressione per $d\Omega(S^2) = \sin{\alpha} \, d\alpha \, d\beta$, si ottiene infine:
+            \begin{equation}
+                dg \propto \sin^2{\theta} \sin{\alpha} \, d\theta \, d\alpha \, d\beta.
+            \end{equation}
+            dove il proporzionale è necessario perché manca il termine di normalizzazione, che si può facilmente ricavare calcolando il valore dell'integrale su $S^3$
+            \begin{equation}
+                \int_0^{\pi} \int_{0 \to \pi} \int_{0}^{2 \pi} \sin^2{\theta} \sin{\alpha} \, d\theta \, d\alpha \, d\beta = 2 \pi \int_{0}^\pi \sin^{2}(\theta) d \theta \int_{0}^\pi \sin{\alpha} d\alpha, 
+            \end{equation}
+            e ricordando che
+            \begin{equation}
+                \int_0^{\pi} \sin^2{\theta} d\theta = \int_0^{\pi} \frac{1 - \cos(2\theta)}{2} d\theta = \int_{0}^\pi d\theta = \frac{\pi}{2},
+            \end{equation}
+            e che
+            \begin{equation}
+                \int_0^\pi \sin{\alpha} d\alpha = 2,
+            \end{equation}
+            si conclude che
+            \begin{equation}
+                \int_0^{\pi} \int_{0 \to \pi} \int_{0}^{2 \pi} \sin^2{\theta} \sin{\alpha} \, d\theta \, d\alpha \, d\beta = 2 \pi^2,
+            \end{equation}
+            da cui segue che per rispettare la $\circled{1}$ si deve avere che
+            \begin{equation}
+                dg = \frac{1}{2 \pi^2} \sin^2{\theta} \sin{\alpha} \, d\theta \, d\alpha \, d\beta.
+            \end{equation}
+            Si può facilmente verificare che questa misura è effettivamente una misura di Haar.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{immagini/SU(2)_explanation.png}
+                \caption{Spiegazione delle coordinate scelte per la parametrizzazione di $\text{SU}(2)$}
+            \end{figure}
+            \item L'ultimo esempio che consideriamo è quello del gruppo delle matrici triangolari $2 \times 2$, ovvero le matrici della forma
+            \begin{equation}
+                T = \begin{pmatrix}
+                    a & b \\
+                    0 & c
+                \end{pmatrix},
+            \end{equation}
+            con la condizione che $ac \neq 0 \, (\iff a \neq 0 \wedge c \neq 0 \text{ per il principio di annullamento del prodotto})$. Tramite la parametrizzazione delle matrici con $a, b, c$ è immediato far vedere che l'insieme delle matrici triangolari $2 \times 2$ è un gruppo: prese due matrici triangolari, infatti, si ha che
+            \begin{equation}
+                T_1 T_2 = \begin{pmatrix}
+                    a_1 & b_1 \\
+                    0 & c_1
+                \end{pmatrix} \begin{pmatrix}
+                    a_2 & b_2 \\
+                    0 & c_2
+                \end{pmatrix} = \begin{pmatrix}
+                    a_1 a_2 & a_1 b_2 + b_1 c_2 \\
+                    0 & c_1 c_2 
+                \end{pmatrix},
+            \end{equation}
+            che è ancora una matrice triangolare e $a_1 a_2 c_1 c_2 \neq 0$ (siccome sarebbe equivalente a chiedere che $a_1 \neq 0 \wedge a_2 \neq 0 \wedge c_1 \neq 0 \wedge c_2 \neq 0$ sempre per il principio di annullamento del prodotto, ma ciò è garantito dal fatto che sappiamo che vale contemporaneamente il fatto che $a_1 c_1 \neq 0$ e $a_2 c_2 \neq 0$).
+            Osserviamo che se vogliamo imporre che la misura di Haar sia invariante "a sinistra", ovvero che
+            \begin{equation}
+                \int_G dg f(g) = \int_G dg f(a \circ g), 
+            \end{equation}
+            con $a \in G$ fissato, si deve avere che 
+    \end{enumerate}
+\end{example}
