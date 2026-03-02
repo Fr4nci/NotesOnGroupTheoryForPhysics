@@ -38,6 +38,8 @@ differenziabile che lega
     \end{enumerate}
     Allora diremo che $G$ è un gruppo di Lie.
 \end{definition}
+Diamo al momento una piccola anticipazione del concetto di rappresentazione: essa è, sostanzialmente, un omomorfismo fra un gruppo e un gruppo di matrici, per cui $T \mapsto M(T)$ e $T_1 \circ T_2 \mapsto M(T_1) M(T_2)$ (dove si sottointende
+il prodotto di matrici)
 
 Uno dei risultati sicuramente più importanti sui gruppi di Lie si ha introducendo le misura di Haar, che definiamo come
 \begin{definition}[misura di Haar]
@@ -144,7 +146,7 @@ Non daremo una dimostrazione di questo fatto, tuttavia ci concentreremo nel forn
             \begin{equation}
                 x_2^2 + y_1^2 + y_2^2 = 1 - \cos^2{\theta} = \sin^2{\theta},
             \end{equation}
-            e quindi la terna $(x_2, y_1, y_2)$ è costretta a "vivere" su una superficie sferica bidimensionale $S^2$ di raggio $\sin{\theta}$. Parametrizzando questa terna con le coordinate sferiche consuete, introduciamo due angoli $\alpha \in [0, \pi]$ e $\beta \in [0, 2\pi)$:
+            e quindi la terna $(x_2, y_1, y_2)$ è costretta a ``vivere" su una superficie sferica bidimensionale $S^2$ di raggio $\sin{\theta}$. Parametrizzando questa terna con le coordinate sferiche consuete, introduciamo due angoli $\alpha \in [0, \pi]$ e $\beta \in [0, 2\pi)$:
             \begin{equation}
                 \begin{cases}
                     x_2 = \sin{\theta} \sin{\alpha} \cos{\beta} \\
@@ -162,7 +164,7 @@ Non daremo una dimostrazione di questo fatto, tuttavia ci concentreremo nel forn
             \end{equation}
             dove il proporzionale è necessario perché manca il termine di normalizzazione, che si può facilmente ricavare calcolando il valore dell'integrale su $S^3$
             \begin{equation}
-                \int_0^{\pi} \int_{0 \to \pi} \int_{0}^{2 \pi} \sin^2{\theta} \sin{\alpha} \, d\theta \, d\alpha \, d\beta = 2 \pi \int_{0}^\pi \sin^{2}(\theta) d \theta \int_{0}^\pi \sin{\alpha} d\alpha, 
+                \int_0^{\pi} \int_{0}^\pi \int_{0}^{2 \pi} \sin^2{\theta} \sin{\alpha} \, d\theta \, d\alpha \, d\beta = 2 \pi \int_{0}^\pi \sin^{2}(\theta) d \theta \int_{0}^\pi \sin{\alpha} d\alpha, 
             \end{equation}
             e ricordando che
             \begin{equation}
@@ -174,7 +176,7 @@ Non daremo una dimostrazione di questo fatto, tuttavia ci concentreremo nel forn
             \end{equation}
             si conclude che
             \begin{equation}
-                \int_0^{\pi} \int_{0 \to \pi} \int_{0}^{2 \pi} \sin^2{\theta} \sin{\alpha} \, d\theta \, d\alpha \, d\beta = 2 \pi^2,
+                \int_0^{\pi} \int_{0}^\pi \int_{0}^{2 \pi} \sin^2{\theta} \sin{\alpha} \, d\theta \, d\alpha \, d\beta = 2 \pi^2,
             \end{equation}
             da cui segue che per rispettare la $\circled{1}$ si deve avere che
             \begin{equation}
@@ -207,10 +209,182 @@ Non daremo una dimostrazione di questo fatto, tuttavia ci concentreremo nel forn
                 \end{pmatrix},
             \end{equation}
             che è ancora una matrice triangolare e $a_1 a_2 c_1 c_2 \neq 0$ (siccome sarebbe equivalente a chiedere che $a_1 \neq 0 \wedge a_2 \neq 0 \wedge c_1 \neq 0 \wedge c_2 \neq 0$ sempre per il principio di annullamento del prodotto, ma ciò è garantito dal fatto che sappiamo che vale contemporaneamente il fatto che $a_1 c_1 \neq 0$ e $a_2 c_2 \neq 0$).
-            Osserviamo che se vogliamo imporre che la misura di Haar sia invariante "a sinistra", ovvero che
+            Osserviamo che se vogliamo imporre che la misura di Haar sia invariante ``a sinistra", ovvero che
             \begin{equation}
                 \int_G dg f(g) = \int_G dg f(a \circ g), 
             \end{equation}
-            con $a \in G$ fissato, si deve avere che 
+            con $a \in G$ fissato, si deve avere che col cambiamento di variabile $t = a \circ g$ la misura $dg(t) = dt$: si ha allora che se
+            \begin{equation}
+                T_x = \begin{pmatrix}
+                    x & y \\
+                    0 & z
+                \end{pmatrix},
+            \end{equation}
+            è l'elemento di gruppo integrato e
+            \begin{equation}
+                T = \begin{pmatrix}
+                    a & b \\
+                    0 & c
+                \end{pmatrix},
+            \end{equation}
+            è l'elemento $a$ fissato, allora
+            \begin{equation}
+                T T_x = \begin{pmatrix}
+                    ax & ay + bz \\
+                    0  & cz
+                \end{pmatrix} = \begin{pmatrix}
+                    x' & y' \\
+                    0 & z'
+                \end{pmatrix},
+            \end{equation}
+            osserviamo che allora con il cambiamento di variabile $t = a \circ g$, allora
+            \begin{equation}
+                \begin{cases}
+                    x' = ax \\
+                    y' = ay + bz \\
+                    z' = cz
+                \end{cases},
+            \end{equation}
+            e calcolando la matrice jacobiana si ha che lo jacobiano risulta essere
+            \begin{equation}
+                \det{\begin{bmatrix}
+                    a & 0 & 0 \\
+                    0 & b & c \\
+                    0 & 0 & c
+                \end{bmatrix}} = a^2 c,
+            \end{equation}
+            dunque
+            \begin{equation}
+                dx' dy' dz' = a^2 c dx dy dz = \left( \frac{x'}{x} \right)^2 \frac{z'}{z} dx dy dz \implies \frac{dx' dy' dz'}{(x')^2 z'} = \frac{dx dy dz}{x^2 z},
+            \end{equation}
+            risulta quindi che 
+            
+            \begin{equation} \label{eq:mis_triang_destra}
+                dg = \frac{dx dy dz}{x^2 z}
+            \end{equation}
+            
+            è la misura cercata. Ripetendo il conto, tuttavia, si scopre che la misura invariante \emph{a destra} è diversa da questa trovata:
+            il motivo sta chiaramente nel fatto che questo gruppo \textbf{non} è compatto, dunque non è garantita l'esistenza di una misura di Haar invariante a destra e sinistra.
+            \begin{exercise}
+                Trovare la misura invariante a destra di questo gruppo
+            \end{exercise}
+            \begin{proof}[Svolgimento]
+                E' sufficiente osservare che, fissando una matrice $T$ della forma
+                \begin{equation}
+                    T = \begin{pmatrix}
+                        a & b \\
+                        0 & c
+                    \end{pmatrix},
+                \end{equation}
+                e una matrice $T_x$ (che sarà quella ``integrata") si ha che
+                \begin{equation}
+                    T_x T = \begin{pmatrix}
+                        x & y \\
+                        0 & z
+                    \end{pmatrix} \begin{pmatrix}
+                        a & b \\
+                        0 & c
+                    \end{pmatrix} = \begin{pmatrix}
+                        ax & bx + cy \\
+                        0  & cz
+                    \end{pmatrix},
+                \end{equation} 
+                dunque lo jacobiano della trasformazione risulta essere pari a
+                \begin{equation}
+                    \det{\begin{pmatrix} a & 0 & 0 \\ b & c & 0 \\ 0 & 0 & c \end{pmatrix}} = ac^2,
+                \end{equation}
+                da cui si ottiene che
+                \begin{equation}
+                    dx' dy' dz' = ac^2 dxdydz = \left( \frac{x'}{x} \right) \left(\frac{z'}{z} \right)^2 dx dy dz \implies \frac{dx' dy' dz'}{x' (z')^2} = \frac{dx dy dz}{x z^2}.
+                \end{equation}
+                Concludiamo che la misura di questo gruppo invariante a sinistra sia $dg = \frac{dx dy dz}{x z^2}$ che è distinta dalla misura vista in \ref{eq:mis_triang_destra}.
+            \end{proof}
     \end{enumerate}
 \end{example}
+\section{Algebra di Lie}
+Vogliamo adesso descrivere il comportamento del gruppo in un \emph{intorno} dell'identità di un gruppo di Lie: per fare questo si introduce il concetto di \emph{generatore infinitesimo del gruppo $G$}.
+
+\begin{definition}
+    Sia $G$ un gruppo di Lie per cui $g(\{ \alpha \}) \in G$ e si consideri una rappresentazione $g \mapsto M(g) = M({\alpha})$, definiamo il \emph{generatore infinitesimo del gruppo $G$} come
+    \begin{equation}
+        T^i = -i \frac{\partial M(\alpha)}{\partial \alpha_i} \bigg|_{\{ \alpha \} = 0}.
+    \end{equation}
+\end{definition}
+
+Questi generatori entrano in gioco considerando l'espansione in serie di Taylor di una matrice $M(\{ \alpha \})$, ovvero si ha che
+\begin{equation}
+    M(\{ \alpha \}) = \mathbf{1} + i \alpha_i T^i + \ldots
+\end{equation}
+
+
+Si postula, nella nostra trattazione, che i $\{ T^i \}$ posseggano le seguenti proprietà:
+\begin{enumerate}[label=\protect\circled{\arabic*}]
+    \item formino uno spazio vettoriale, che chiameremo \emph{algebra del gruppo $G$}, quindi
+    \begin{equation}
+        \{ T^a \} \in \text{Alg}(G) \, (\text{oppure scriveremo } \mathfrak{g}),
+    \end{equation}
+    nel senso che
+    \begin{equation}
+        c_1 T^1 + c_2 T^2 + \ldots + c_n T^n \in \mathfrak{g},
+    \end{equation}
+    e ciò implica che anche lo $\mathbf{0} \in \mathfrak{g}$
+    \item il set $\{ T^a \}$ è chiuso per commutazioni, ovvero
+    \begin{equation} \label{eq:comm_inf}
+        [T^a, T^b] \stackrel{\text{def.}}{\equiv} T^a T^b - T^b T^a \in \mathfrak{g}.
+    \end{equation}
+\end{enumerate}
+Da queste è possibile provare, abbastanza facilmente, che siccome $\mathfrak{g}$ ha la struttura di spazio vettoriale, allora è possibile scegliere i generatori
+in maniera tale che siano ortogonali rispetto alla traccia (conseguenza del teorema di Lagrange)
+$$
+    \text{Tr}(T^a T^b) = C \delta^{ab},
+$$
+dove la costante $C$ è detto indice di Dynkin e dipende dalla rappresentazione scelta (vedremo poi che, fissando un indice di Dynkin, allora gli altri indici delle altre rappresentazioni saranno fissati).
+Prendendo una base opportuna di $\mathfrak{g}$, possiamo dire che la condizione espressa in (\ref{eq:comm_inf}) equivale a
+\begin{equation}
+    [T^a, T^b] = i f^{abc} T^c,
+\end{equation}  
+e segue chiaramente dal fatto che $[T^a, T^b] = -[T^b, T^a]$ che $f^{bac} = - f^{abc}$. Possiamo dire di più, in realtà, osservando che moltiplicando per $T^d$ da entrambi i lati
+\begin{equation} \label{eq:ant_comm}
+    [T^a, T^b] T^d = i f^{abc} T^c T^d \implies \text{Tr}([T^a, T^b] T^d)=\text{Tr}(i f^{abc} T^c T^d) = i f^{abc} \text{Tr}(T^c T^d) = i f^{abc} C \delta^{cd},
+\end{equation}
+da cui, prendendo $T^d = T^c$, si ottiene che
+\begin{equation}
+    iCf^{abc} = \text{Tr}([T^a, T^b] T^c) = \text{Tr}(T^a T^b T^c - T^b T^a T^c) \implies f^{abc} = - \frac{i}{C} (\text{Tr}(T^a T^b T^c) - \text{Tr}(T^b T^a T^c)), 
+\end{equation}
+e sfruttando la proprietà della traccia
+\begin{equation}
+    \text{Tr}(AB) = \text{Tr}(BA),
+\end{equation}
+si ottiene che
+\begin{align}
+    f^{abc} &= - \frac{i}{C} (\text{Tr}(T^a T^b T^c) - \text{Tr}(T^b T^a T^c)) = - \frac{i}{C} (\text{Tr}(T^b T^c T^a) - \text{Tr}(T^c T^b T^a)) = f^{bca} = \\
+    &= - \frac{i}{C} (\text{Tr}(T^c T^a T^b) - \text{Tr}(T^a T^c T^b)) = f^{cab},
+\end{align}
+dove le espressioni di $f^{bca}$ e $f^{cab}$ sono ottenute ragionando come sopra in (\ref{eq:ant_comm}).
+Una domanda che finora non abbiamo risposto sarebbe ``\emph{qual è il miglior modo per parametrizzare un gruppo?}" Nel caso di $\text{SO}(2)$, per esempio, abbiamo una grande libertà di scelta dovuto al fatto che l'angolo è definito a
+meno di $2 k \pi$, tuttavia la scelta più saggia per i nostri scopi sarebbe la \emph{parametrizzazione esponenziale}, per cui risulta che
+\begin{equation}
+    R(\{ \alpha \}) = e^{i \alpha_a T^a},
+\end{equation}
+che può essere interpretato come un'iterazione di trasformazioni infinitesime successive, ottenendo così un elemento finito
+\begin{equation}
+    \lim_{k \to + \infty} (\mathbf{1} + i\frac{\alpha_a T^a}{k})^k,
+\end{equation}
+che risulta consistente con la definizione data dei generatori. \\
+La necessità della commutazione fra i generati entra in gioco quando si considera il commutatore ``usuale'' che abbiamo definito nei gruppi: se consideriamo degli elementi molto ``vicini'' all'identità, sappiamo che
+\begin{align}
+&g_1 \approx \mathbf{1} + i \alpha T - (\alpha T)^2, \\
+&g_2 \approx \mathbf{1} + i \beta T - (\beta T)^2,
+\end{align}
+da cui si ha che
+\begin{align}
+&g_1^{-1} \approx \mathbf{1} - i \alpha T - (\alpha T)^2 \\
+&g_2^{-1} \approx \mathbf{1} - i \alpha T - (\alpha T)^2,
+\end{align}
+da cui si ha che
+\begin{align}
+    &g_1^{-1} \circ g_2^{-1} \circ g_1 \circ g_2 =  \\
+    &= (\mathbf{1} - i \alpha T - (\alpha T)^2) \circ (\mathbf{1} - i \alpha T - (\alpha T)^2) \circ (\mathbf{1} + i \alpha T - (\alpha T)^2) \circ (\mathbf{1} + i \beta T - (\beta T)^2),
+\end{align}
+Una domanda che può sorgere è \emph{l'algebra di un gruppo determina univocamente il gruppo?} La risposta è \textbf{no}: infatti si ha che, in $\text{SO}(3)$ i generatori infinitesimi sono gli stessi di
+$\text{SU}(2)$, quindi il gruppo determina univocamente l'algebra, ma non vale il viceversa. 
