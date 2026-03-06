@@ -617,11 +617,16 @@ Possiamo introdurre anche la nozione di \emph{sottoalgebra invariante}, che come
     \begin{align}
         g^{-1} h g = g^{-1} e^{i \alpha_{\dot{a}} Y^{\dot{a}}} g = e^{g^{-1} i \alpha_{\dot{a}} Y^{\dot{a}} g},
     \end{align}
-    e si osserva che
+    dove abbiamo usato il fatto che
+    $$
+        g^{-1} e^{A} g = g^{-1} \left( \sum_{k = 0}^{+\infty} \frac{A^k}{k!} \right) g = \sum_{k=0}^{+\infty} \frac{(g^{-1}Ag)^k}{k!} = e^{g^{-1} A g},
+    $$
+    in quanto $(g^{-1} A g)^n = (g^{-1} A g)^n = (g^{-1} A g)(g^{-1} A g) \ldots (g^{-1}Ag)(g^{-1} A g) = g^{-1} A^n g$.
+    Si osserva che
     \begin{align}
         &(\mathbf{1} - i \alpha_{\dot{a}} Y^{\dot{a}} + \ldots) Y^{\dot{a}} (\mathbf{1} + i \alpha_{\dot{a}} Y^{\dot{a}} + \ldots) = \\
-        &= Y^{\dot{a}} - i \beta_b[X^\beta, Y^{\dot{a}}] + \frac{(-i)^2}{2!} [\beta \cdot X, [\beta \cdot X, Y]] + \ldots + \\
-        &+\frac{(-i)^n}{n!}[\beta \cdot X, [\beta \cdot X, [\ldots, [\beta \cdot X, Y]]] \ldots] + \ldots = \\
+        &= Y^{\dot{a}} - \underbrace{i \beta_b[X^\beta, Y^{\dot{a}}]}_{{\in \mathfrak{h}}} + \frac{(-i)^2}{2!} \underbrace{[\beta \cdot X, [\beta \cdot X, Y]]}_{\in \mathfrak{h}} + \underbrace{\ldots}_{\in \mathfrak{h}} + \\
+        &+\frac{(-i)^n}{n!}\underbrace{[\beta \cdot X, [\beta \cdot X, [\ldots, [\beta \cdot X, Y]]] \ldots]}_{\in \mathfrak{h}} + \underbrace{\ldots}_{\in \mathfrak{h}} = \\
         &= \gamma_{\dot{c}} Y^{\dot{c}} \in \mathfrak{h}.
     \end{align}
 \end{proof}
