@@ -364,27 +364,297 @@ dove le espressioni di $f^{bca}$ e $f^{cab}$ sono ottenute ragionando come sopra
 Una domanda che finora non abbiamo risposto sarebbe ``\emph{qual è il miglior modo per parametrizzare un gruppo?}" Nel caso di $\text{SO}(2)$, per esempio, abbiamo una grande libertà di scelta dovuto al fatto che l'angolo è definito a
 meno di $2 k \pi$, tuttavia la scelta più saggia per i nostri scopi sarebbe la \emph{parametrizzazione esponenziale}, per cui risulta che
 \begin{equation}
-    R(\{ \alpha \}) = e^{i \alpha_a T^a},
+    R(\{ \alpha \}) = e^{i \alpha^a T^a},
 \end{equation}
 che può essere interpretato come un'iterazione di trasformazioni infinitesime successive, ottenendo così un elemento finito
 \begin{equation}
-    \lim_{k \to + \infty} (\mathbf{1} + i\frac{\alpha_a T^a}{k})^k,
+    \lim_{k \to + \infty} \left( \mathbf{1} + i \frac{\alpha_a T^a}{k} \right)^k,
 \end{equation}
 che risulta consistente con la definizione data dei generatori. \\
 La necessità della commutazione fra i generati entra in gioco quando si considera il commutatore ``usuale'' che abbiamo definito nei gruppi: se consideriamo degli elementi molto ``vicini'' all'identità, sappiamo che
 \begin{align}
-&g_1 \approx \mathbf{1} + i \alpha T - (\alpha T)^2, \\
-&g_2 \approx \mathbf{1} + i \beta T - (\beta T)^2,
+&g_1 \approx \mathbf{1} + i \alpha T - \frac{1}{2}(\alpha T)^2, \
+&g_2 \approx \mathbf{1} + i \beta T - \frac{1}{2}(\beta T)^2,
 \end{align}
 da cui si ha che
 \begin{align}
-&g_1^{-1} \approx \mathbf{1} - i \alpha T - (\alpha T)^2 \\
-&g_2^{-1} \approx \mathbf{1} - i \alpha T - (\alpha T)^2,
+&g_1^{-1} \approx \mathbf{1} - i \alpha T - \frac{1}{2}(\alpha T)^2 \
+&g_2^{-1} \approx \mathbf{1} - i \beta T - \frac{1}{2}(\beta T)^2,
 \end{align}
-da cui si ha che
+da cui segue che
 \begin{align}
     &g_1^{-1} \circ g_2^{-1} \circ g_1 \circ g_2 =  \\
-    &= (\mathbf{1} - i \alpha T - (\alpha T)^2) \circ (\mathbf{1} - i \alpha T - (\alpha T)^2) \circ (\mathbf{1} + i \alpha T - (\alpha T)^2) \circ (\mathbf{1} + i \beta T - (\beta T)^2),
+    &= (\mathbf{1} - i \alpha T - (\alpha T)^2) \circ (\mathbf{1} - i \beta T - (\beta T)^2) \circ (\mathbf{1} + i \alpha T - (\alpha T)^2) \circ (\mathbf{1} + i \beta T - (\beta T)^2) \\
+    &= (\mathbf{1} - i \beta T - (\beta T)^2 - i \alpha T + (\alpha T) (\beta T) + i (\alpha T) (\beta T)^2 - (\alpha T)^2 + i (\alpha T)^2 (\beta T) + (\alpha T)^2 (\beta T)^2) \circ \\
+    &( \mathbf{1} + i \beta T - (\beta T)^2 + i \alpha T - (\alpha T)(\beta T) - i (\alpha T)(\beta T)^2 - (\alpha T)^2 - i (\alpha T)^2 (\beta T) + (\alpha T)^2 (\beta T)^2) = \\
+    &= \mathbf{1} - (\alpha T)(\beta T) + (\beta T)(\alpha T) \\
+    &= \mathbf{1} + \alpha^a \beta^b(T^b T^a - T^a T^b) = \mathbf{1} - \alpha^a \beta^b [T^a, T^b].
 \end{align}
-Una domanda che può sorgere è \emph{l'algebra di un gruppo determina univocamente il gruppo?} La risposta è \textbf{no}: infatti si ha che, in $\text{SO}(3)$ i generatori infinitesimi sono gli stessi di
-$\text{SU}(2)$, quindi il gruppo determina univocamente l'algebra, ma non vale il viceversa. 
+Per coerenza, si deve avere che questo elemento qua è ancora "sufficientemente" vicino all'identità, dunque è espandibile in serie, pertanto si deve avere che
+\begin{align}
+    &g_1^{-1} \circ g_2^{-1} \circ g_1 \circ g_2 = \mathbf{1} + i \gamma^c T^c + \ldots = \mathbf{1} - \alpha^a \beta^b [T^a, T^b] + \ldots = \mathbf{1} + i \gamma T^c \implies \\
+    &\implies \alpha^a \beta^b [T^a, T^b] = i \gamma^c T^c.
+\end{align}
+
+\begin{figure}
+    \centering
+    \usetikzlibrary{positioning, calc}
+    \begin{tikzpicture}
+        % Punto di partenza (Identità)
+        \coordinate (y) at (0,-3);
+        \filldraw (y) circle (1.5pt) node[below left, font=\large] {$e$};
+        
+        % Cammino g1
+        \draw[->, thick, blue] (y) to[bend right=10] 
+            node[below right, font=\small] {$g_1$} ++(2.5, 0.8) coordinate (p1);
+            
+        % Cammino g2
+        \draw[->, thick, orange] (p1) to[bend right=10] 
+            node[right, font=\small] {$g_2$} ++(0.8, 2.5) coordinate (p2);
+            
+        % Cammino g1^{-1} (quasi opposto a g1, ma spostato sulla varietà)
+        \draw[->, thick, blue, dashed] (p2) to[bend right=10] 
+            node[above left, font=\small] {$g_1^{-1}$} ++(-2.3, -0.6) coordinate (p3);
+            
+        % Cammino g2^{-1} (non chiude il quadrato!)
+        \draw[->, thick, orange, dashed] (p3) to[bend right=10] 
+            node[left, font=\small] {$g_2^{-1}$} ++(-0.6, -2.1) coordinate (p4);
+
+        % Punto finale
+        \filldraw (p4) circle (1pt) node[above right, font=\small] {};
+
+        % Il gap: il commutatore
+        %\draw[->, thick, red] (y) -- (p4) 
+        %    node[midway, left, font=\small, text=red] {$\mathbf{1} - [A, B]$};
+    \end{tikzpicture}
+    \caption{Rappresentazione del cammino infinitesimo $g_1^{-1} \circ g_2^{-1} \circ g_1 \circ g_2$. Nel caso di un gruppo non abeliano, l'iterazione delle trasformazioni dirette e inverse non riporta esattamente all'identità $e$. Il "gap" residuo è descritto dal commutatore dei generatori.}
+\end{figure}
+
+\begin{definition}[costanti di gruppo]
+    Siano $\{ T^a \}$ i generatori infinitesimi di un gruppo di Lie $G$, allora si ha che
+    \begin{align}
+        [T^a, T^b] = i f^{abc} T^c,
+    \end{align}
+    dove $f^{abc}$ prendono il nome di \emph{costante del gruppo} e ne determinano l'algebra infinitesima.
+\end{definition}
+
+Una domanda che può sorgere è \emph{l'algebra di un gruppo determina univocamente il gruppo?} La risposta è \textbf{no}: infatti si ha che, in $\text{SO}(3)$ le costanti di gruppo sono le stesse di
+$\text{SU}(2)$, quindi possiamo dire che il gruppo determina univocamente l'algebra associata, ma non il viceversa. 
+
+Prendiamo come esempio sempre $SU(2)$: possiamo far vedere che i generatori di tale gruppo soddisfano la seguente relazione
+\begin{align}
+    [\frac{\sigma^a}{2}, \frac{\sigma^b}{2}] = i \epsilon^{abc} \frac{\sigma^c}{2},
+\end{align}
+(\emph{E' abbastanza semplice: si ha che
+\begin{align}
+    &\sigma^1 = \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix}, & &\sigma^2 = \begin{pmatrix}
+        0 & -i \\
+        i & 0
+    \end{pmatrix}, & &\sigma^3 = \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+    \end{pmatrix},
+\end{align}
+da cui si ha che
+\begin{align}
+    \left[ \frac{\sigma^1}{2}, \frac{\sigma^2}{2} \right] = \frac{1}{4} \left(\sigma^1 \sigma^2 - \sigma^2 \sigma^1 \right) = \frac{1}{4} \left(\begin{pmatrix}
+        i & 0 \\
+        0 & -i
+    \end{pmatrix} - \begin{pmatrix}
+        -i & 0 \\
+        0 & i
+    \end{pmatrix} \right) = \frac{1}{2} \begin{pmatrix}
+        i & 0 \\
+        0 & -i
+    \end{pmatrix} = i \frac{\sigma^3}{2} = i \epsilon^{123} \frac{\sigma^3}{2}, 
+\end{align}
+e così per tutti gli altri.})
+\begin{definition}[rappresentazione unitaria]
+    Sia $G$ un gruppo e sia data una rappresentazione del gruppo, ovvero $g \in G \mapsto M(g)$ matrice, diremo che la rappresentazione è unitaria se
+    \begin{align}
+        M(g)M(g)^\dagger = \mathbf{1}.
+    \end{align}
+\end{definition}
+Questo implica il fatto che i generatori siano hermitiani, infatti presa $U$ con
+\begin{equation}
+    U = e^{i \alpha^a T^a},
+\end{equation}
+allora
+\begin{equation}
+    U^\dag = e^{-i \alpha (T^\dagger)^\alpha} = U^{-1} = e^{i \alpha^a T^a} \implies (T^{\dagger})^a = T^a.
+\end{equation}
+Si può mostrare per esercizio che vale la seguente proprietà:
+\begin{exercise}
+    Sia $A = e^B$ allora
+    \begin{align} \label{eq:tr_gen}
+        \det{A} = e^{\text{Tr}(B)}.
+    \end{align}
+\end{exercise}
+\begin{proof}
+    Sappiamo, dal teorema di triangolarizzazione, che una matrice che ha tutte le radici del polinomio caratteristico nel campo di appartenenza è simile ad una matrice triangolare superiore, dunque
+    \begin{align}
+        \exists P \in \text{GL}(\mathbb{C}) : P^{-1} D P = B,
+    \end{align}
+    pertanto abbiamo che
+    \begin{align}
+        e^B = \sum_{n = 0}^{+\infty} \frac{B^n}{n!} = \sum_{k = 0}^{+\infty} \frac{(P^{-1} D P)^n}{n!} = P^{-1} \left( \sum_{k=0}^{+\infty} \frac{D^n}{n!} \right) P = P^{-1} e^D P,
+    \end{align}
+    da cui si ottiene che
+    \begin{align}
+        \det{e^B} = \det{P^{-1} e^D P} = \det{e^D} = e^{\lambda_1} e^{\lambda_2} \ldots e^{\lambda_n} = e^{\sum_{k = 1}^n \lambda_k} = e^{\text{Tr}(B)}.
+    \end{align}
+\end{proof}
+\begin{remark}
+    Nel caso reale, la dimostrazione è valida usando la forma canonica di Jordan, tuttavia è sufficiente osservare che, mettendoci in $\mathbb{C}$ e guardando ogni matrice reale come matrice complessa, la dimostrazione è sempre valida,
+    oltre al fatto che il determinante è chiaramente reale siccome
+    \begin{enumerate}
+        \item il polinomio caratteristico è reale;
+        \item le radici complesse, siccome i coefficienti sono tutti reali, devono presentarsi a coppie con il loro coniugato;
+        \item la traccia è quindi reale;
+        \item il determinante è, quindi, reale. 
+    \end{enumerate}
+\end{remark}
+
+Abbiamo esplicitamente visto che i generatori di $\text{SU}(2)$ sono $3$, mentre $\text{SU}(3)$ ha le seguenti condizioni
+\begin{enumerate}[label=\protect\circled{\arabic*}]
+    \item $U U^\dagger = \mathbf{1} \implies$ i generatori devono essere hermitiani, quindi abbiamo che gli elementi sulla diagonale devono essere reali e gli elementi sono uno il coniugato dell'altro;
+    \item $\det{U} = 1$, dunque si deve avere che i generatori hanno traccia nulla, usando l'esercizio mostrato sopra.      
+\end{enumerate}
+Si ottiene quindi che abbiamo
+$$
+    2 * 3^2 - 3 - 3(3-1) - 1 = 18 - 3 - 6 - 1 = 9 - 1 = 8,
+$$
+dove abbiamo tenuto di conto del fatto che, in totale, abbiamo inizialmente, con $n=3$, ben $2n^2$ numeri liberi (per ogni entrata abbiamo una parte reale e una parte immaginaria) e abbiamo usato il fatto che dobbiamo togliere $2 \frac{n^2 - n}{2}$ entrate sopra diagonale per
+la condizione di hermitianeità (e il fattore $2$ tiene sempre di conto del fatto che abbiamo parte reale e immaginaria), mentre la condizione di determinante uguale a $1$ ci toglie un parametro libero. In generale si può mostrare che
+\begin{exercise}
+    Il numero di generatori di $\text{SU}(n)$ è pari a $n^2 - 1$.
+\end{exercise}
+\begin{proof}
+    In linea teorica, i nostri generatori hanno, senza imporre alcun vincolo, ben $2n^2$ parametri liberi (il fattore $2$ tiene di conto sempre del fatto che abbiamo sia una parte reale che una parte complessa). Si ha, tuttavia, che il vincolo di $UU^\dagger = \mathbf{1}$ ci dice che i generatori
+    devono essere hermitiani, quindi si ha che sulla diagonale abbiamo numeri reali (quindi vanno tolti $N$ parametri) e altrove abbiamo ben che gli elementi sopra diagonale vincolano quelli sotto e le entrate sopra diagonale sono $\frac{N(N-1)}{2}$ e per tenere conto di parte reale e complessa moltiplichiamo per $2$.
+    Usando poi la (\ref{eq:tr_gen}) si ottiene che la traccia dei generatori dev'essere nulla, quindi si ha un solo vincolo (perché sappiamo già che gli elementi sulla diagonale sono reali). Si ha quindi che
+    \begin{equation}
+        2n^2 - 2 \, \frac{n(n-1)}{2} - n - 1 = n^2 - 1. 
+    \end{equation}
+\end{proof}
+\begin{exercise}
+    Il numero di generatori di $\text{SO}(n)$ è pari a
+    \begin{align}
+        \frac{n(n-1)}{2}
+    \end{align}
+\end{exercise}
+\begin{proof}
+    Si osserva che abbiamo $n$ numeri liberi e dalla condizione di trasposizione si ottiene che se
+    \begin{align}
+        A = e^(i \alpha^a T^a) \implies A^T A = e^{i \alpha^a (T^t)^a} e^{i \alpha^a T^{a}} = \mathbf{1} \implies e^{i \alpha^a (T^t)^a} = e^{-i \alpha^a T^a}, 
+    \end{align}
+    da cui si ha che
+    \begin{align}
+        T^t = -T,
+    \end{align}
+    ovvero i generatori sono matrici antisimmetriche. La condizione per cui il determinante dev'essere uno mi impone che la traccia dei generatori sia zero, tuttavia è già rispetta dal fatto che i generatori siano antisimmetrici: si conclude
+    dunque che il numero di generatori di $\text{SO}(n)$ è pari a
+    \begin{align}
+        \frac{n(n-1)}{2}.
+    \end{align}
+\end{proof}
+\begin{remark}
+    Abbiamo usato il fatto che, presa $A_n$ successioni di matrici, la trasposizione è continua, ovvero
+    \begin{align}
+        (\lim_{n \to +\infty} A_n)^t = \lim_{n \to +\infty} A_n^t,
+    \end{align}
+    e distributiva rispetto alla somma di matrici, dunque, presa $B$ matrice e indicando con $S_n = \sum_{k=0}^n \frac{B^k}{k!}$, si ha
+    \begin{align}
+        (e^B)^t = \lim_{n \to +\infty} (S_n)^t = \lim_{n \to +\infty} (\sum_{k = 0}^{n} \frac{B^k}{k!})^t = \lim_{n \to +\infty} \sum_{k=0}^n \frac{(B^t)^k}{k!} = e^{B^t}. 
+    \end{align}
+\end{remark}
+
+\subsection{Sottoalgebre}
+
+Come fatto per i gruppi, possiamo introdurre un concetto di sottoalgebra
+
+\begin{definition}[sottoalgebra]
+    Sia $G$ un gruppo di Lie e sia $\{ X^a\}$ un insieme di generatori dell'algebra $\mathfrak{g}$ di $G$. Sia $\mathfrak{h} \subseteq \mathfrak{g}$ con generatori
+    \begin{align}
+        Y^{{\dot{a}}} \in \mathfrak{h} \subseteq \mathfrak{g},
+    \end{align}
+    con
+    \begin{align}
+        [Y^{{\dot{a}}}, Y^{{\dot{b}}}] \in \mathfrak{h},
+    \end{align}
+    allora diremo che $\mathfrak{h}$ forma una sottoalgebra di $\mathfrak{g}$.
+\end{definition}
+Possiamo introdurre anche la nozione di \emph{sottoalgebra invariante}, che come vedremo va a generare dei sottogruppi invarianti
+
+\begin{definition}[sottoalgebra invariante]
+    Sia $G$ un gruppo di Lie e sia $\mathfrak{g}$ l'algebra di Lie di $G$ con generatori $\{ X^a \}$, sia $\mathfrak{h} \subseteq \mathfrak{g}$ una sottoalgebra con generatori $\{ Y^{\dot{a}} \}$, se
+    \begin{align}
+        \forall {\dot{a}}, b, [Y^{\dot{a}}, X^{\dot{b}}] = c_d Y^d \in \mathfrak{h},
+    \end{align}
+    diremo che $\{Y^{\dot{a}} \}$ forma una sottoalgebra invariante o ideale di $\mathfrak{g}$. Se, inoltre,
+    \begin{align}
+        \forall {\dot{a}}, {\dot{b}}, [Y^{\dot{a}}, Y^{\dot{b}}] = 0,
+    \end{align}
+    diremo che $\mathfrak{h}$ forma una sottoalgebra invariante abeliana di $\mathfrak{g}$.
+\end{definition}
+
+\begin{prop}[le sottoalgebre generano sottogruppi invarianti]
+    Sia $G$ un gruppo di Lie con $\mathfrak{g}$ algebra di Lie con generatori $\{ X^a \}$, sia $\mathfrak{h} \subseteq \mathfrak{g}$ un'algebra invariante con generatori $\{ Y^{\dot{a}} \}$, allora presi
+    \begin{align}
+        h = e^{i \alpha_{\dot{a}} Y^{\dot{a}}} \in H, g = e^{i \beta_b X^b} \in G, 
+    \end{align} 
+    si ha che
+    \begin{align}
+        g^{-1} h g \in H,
+    \end{align}
+    ovvero $H$ sottogruppo generato da $\mathfrak{h}$ è un sottospazio invariante di $G$.
+\end{prop}
+\begin{proof}
+    Si osserva che
+    \begin{align}
+        g^{-1} h g = g^{-1} e^{i \alpha_{\dot{a}} Y^{\dot{a}}} g = e^{g^{-1} i \alpha_{\dot{a}} Y^{\dot{a}} g},
+    \end{align}
+    e si osserva che
+    \begin{align}
+        &(\mathbf{1} - i \alpha_{\dot{a}} Y^{\dot{a}} + \ldots) Y^{\dot{a}} (\mathbf{1} + i \alpha_{\dot{a}} Y^{\dot{a}} + \ldots) = \\
+        &= Y^{\dot{a}} - i \beta_b[X^\beta, Y^{\dot{a}}] + \frac{(-i)^2}{2!} [\beta \cdot X, [\beta \cdot X, Y]] + \ldots + \\
+        &+\frac{(-i)^n}{n!}[\beta \cdot X, [\beta \cdot X, [\ldots, [\beta \cdot X, Y]]] \ldots] + \ldots = \\
+        &= \gamma_{\dot{c}} Y^{\dot{c}} \in \mathfrak{h}.
+    \end{align}
+\end{proof}
+
+\section{Gli strumenti per studiare i gruppi di Lee}
+
+Lo scopo di questa sezione è quello di introdurre tutti gli strumenti con cui sarà possibile andare a studiare tutti i gruppi di interesse fisico.
+Questi sono, principalmente, i seguenti:
+
+\begin{enumerate}[label=\protect\circled{\arabic*}]
+    \item mappe di rivestimento per studio delle proprietà locali e globali del gruppo;
+    \item gruppi di omotopia superiori e non;
+    \item gruppo di monodromia;
+    \item teoria delle rappresentazioni. 
+\end{enumerate}
+
+Abbiamo già visto le mappe di rivestimento, quindi partiamo a studiare i gruppi di omotopia: questo concetto si presta particolarmente bene negli spazi topologici connessi per archi:
+
+\begin{definition}[spazio topologico]
+    Sia $X$ un insieme e sia $\tau \subseteq \mathcal{P}(X)$, diremo che $\tau$ è una topologia di $X$ se
+    \begin{enumerate}[label=\protect\circled{\arabic*}]
+        \item $\emptyset, X \in \tau$;
+        \item $\{ A_i \}_{i \in \mathbb{N}} \subseteq \mathcal{P}(X) \implies \bigcup_{i=0}^{+\infty} A_i \in \tau$;
+        \item se $k < +\infty, \{ A_i \}_{i \in \{ 1, \ldots, k\}} \implies \bigcap_{i=0}^k A_i \in \tau$;
+    \end{enumerate}
+    e diremo che $(X,\tau)$ è uno spazio topoligico.
+\end{definition}
+
+\begin{definition}[spazio topologico connesso per archi]
+    Sia $(X, \tau)$ uno spazio topologico, diremo che è connesso per archi se $\forall x, y \in X \exists \gamma : [0,1] \to X$ tale che $\gamma(0) = x, \gamma(1) = y$.
+\end{definition}
+
+Prese due curve da $X = \mathbb{R}^n$, possiamo dare la nozione di equivalenza di una curva
+\begin{definition}[curve equivalenti]
+    Siano $\gamma_1 : [0,1] \to \mathbb{R}^n$ e $\gamma_2 : [0,1] \to \mathbb{R}^n$ con $\gamma_1(0) = \gamma_2(0)$ e $\gamma_1(1) = \gamma_2(1)$, diremo che $\gamma_1(t)$ è equivalente a $\gamma_2(\tau)$ se esiste $f(t) \in C^1([0, 1], [0,1])$ tale che $\tau = f(t)$ con $f'(t) > 0 \, \forall t \in [0,1]$.
+\end{definition}
