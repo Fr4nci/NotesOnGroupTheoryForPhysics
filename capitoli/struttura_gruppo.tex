@@ -596,7 +596,7 @@ Possiamo introdurre anche la nozione di \emph{sottoalgebra invariante}, che come
 \begin{definition}[sottoalgebra invariante]
     Sia $G$ un gruppo di Lie e sia $\mathfrak{g}$ l'algebra di Lie di $G$ con generatori $\{ X^a \}$, sia $\mathfrak{h} \subseteq \mathfrak{g}$ una sottoalgebra con generatori $\{ Y^{\dot{a}} \}$, se
     \begin{align}
-        \forall {\dot{a}}, b, [Y^{\dot{a}}, X^{\dot{b}}] = c_d Y^d \in \mathfrak{h},
+        \forall {\dot{a}}, b, [Y^{\dot{a}}, X^{b}] = c_d Y^d \in \mathfrak{h},
     \end{align}
     diremo che $\{Y^{\dot{a}} \}$ forma una sottoalgebra invariante o ideale di $\mathfrak{g}$. Se, inoltre,
     \begin{align}
@@ -653,17 +653,63 @@ Abbiamo già visto le mappe di rivestimento, quindi partiamo a studiare i gruppi
     Sia $X$ un insieme e sia $\tau \subseteq \mathcal{P}(X)$, diremo che $\tau$ è una topologia di $X$ se
     \begin{enumerate}[label=\protect\circled{\arabic*}]
         \item $\emptyset, X \in \tau$;
-        \item $\{ A_i \}_{i \in \mathbb{N}} \subseteq \mathcal{P}(X) \implies \bigcup_{i=0}^{+\infty} A_i \in \tau$;
-        \item se $k < +\infty, \{ A_i \}_{i \in \{ 1, \ldots, k\}} \implies \bigcap_{i=0}^k A_i \in \tau$;
+        \item $\{ A_i \}_{i \in \mathbb{N}} \subseteq \tau \implies \bigcup\limits_{i=0}^{+\infty} A_i \in \tau$;
+        \item se $k < +\infty, \{ A_i \}_{i \in \{ 1, \ldots, k\}} \subseteq \tau \implies \bigcap\limits_{i=0}^k A_i \in \tau$;
     \end{enumerate}
-    e diremo che $(X,\tau)$ è uno spazio topoligico.
+    e diremo che $(X,\tau)$ è uno spazio topologico.
 \end{definition}
 
 \begin{definition}[spazio topologico connesso per archi]
-    Sia $(X, \tau)$ uno spazio topologico, diremo che è connesso per archi se $\forall x, y \in X \exists \gamma : [0,1] \to X$ tale che $\gamma(0) = x, \gamma(1) = y$.
+    Sia $(X, \tau)$ uno spazio topologico, diremo che è connesso per archi se $\forall x, y \in X, \, \exists \gamma : [0,1] \to X$ tale che $\gamma(0) = x, \gamma(1) = y$.
 \end{definition}
 
-Prese due curve da $X = \mathbb{R}^n$, possiamo dare la nozione di equivalenza di una curva
+Prese due curve su uno spazio $X$, possiamo dare la nozione di equivalenza di una curva
 \begin{definition}[curve equivalenti]
-    Siano $\gamma_1 : [0,1] \to \mathbb{R}^n$ e $\gamma_2 : [0,1] \to \mathbb{R}^n$ con $\gamma_1(0) = \gamma_2(0)$ e $\gamma_1(1) = \gamma_2(1)$, diremo che $\gamma_1(t)$ è equivalente a $\gamma_2(\tau)$ se esiste $f(t) \in C^1([0, 1], [0,1])$ tale che $\tau = f(t)$ con $f'(t) > 0 \, \forall t \in [0,1]$.
+    Siano $\gamma_1 : [a,b] \to X$ e $\gamma_2 : [c,d] \to X$ con $\gamma_1(0) = \gamma_2(0)$ e $\gamma_1(1) = \gamma_2(1)$, diremo che $\gamma_1(t)$ è equivalente a $\gamma_2(\tau)$ se esiste $f(t) \in C^1([a, b], [c,d])$ tale che $\tau(a) = c, \tau(b) = d$ e $\tau = f(t)$ con $f'(t) > 0 \, \forall t \in [a,b]$ oppure, equivalentemente, si ha che
+    \begin{align}
+        \gamma_1(t) = \gamma_2(\tau(t)).
+    \end{align}
 \end{definition}
+
+\begin{example}
+    Come esempio di curve equivalenti possiamo considerare
+    \begin{align}
+        &\gamma_1(t) = (\cos{\left( \frac{\pi}{2} t \right)} ,\sin{\left( \frac{\pi}{2} t \right)}) & &\gamma_2(\tau) = (\cos{\left( \frac{\pi}{2} \sqrt{2} \tau \right), \sin{\left( \frac{\pi}{2} \sqrt{2} \tau \right)}})
+    \end{align}
+    con $t \in [0, 2]$ e $\tau \in [0, \sqrt{2}]$. Si vede che tramite la mappa $[0,1] \ni x \mapsto 2x$ l'intervallo $[0,1]$ viene mappato in quello $[0,2]$, mentre l'intervallo $[0,1]$ in $[0, \sqrt{2}]$ tramite la mappa $[0,1] \ni x \mapsto \sqrt{2} x$, quindi si ha che
+    \begin{align}
+        &\tilde{\gamma_1}(t) = \gamma(2t) = (\cos{\left( \frac{\pi}{\cancel{2}} \cancel{2}t \right)}, \sin{\left( \frac{\pi}{\cancel{2}} \cancel{2}t \right)}) & &\tilde{\gamma_2}(\tau) = \gamma_2(\sqrt{2} \tau) = (\cos{\left( \frac{\pi}{\cancel{2}} \cancel{\sqrt{2} \sqrt{2}} \tau \right)}, \sin{\left( \frac{\pi}{\cancel{2}} \cancel{\sqrt{2} \sqrt{2}}\tau \right)}),
+    \end{align}
+    dove $\tilde{\gamma_1}$ e  $\tilde{\gamma_2}$ hanno sostegno in $[0,1]$. Ne consegue, dunque, che tramite la mappa $f: [0, 2] \to [0, \sqrt{2}]$ dove $x \stackrel{f}{\mapsto} \frac{x}{\sqrt{2}}$, si ha che
+    \begin{align}
+        \gamma_1(t) = \gamma_2(f(t)),
+    \end{align}
+    e chiaramente $f(t)$ è $C^1([0, 2], [0, \sqrt{2}])$, dunque le due curve sono equivalenti
+\end{example}
+
+Possiamo dare, tuttavia, una nozione più forte dell'equivalenza fra curva, ovvero l'\emph{omotopia} fra esse
+
+\begin{definition}[omotopia fra curve]
+    Sia $(X, \tau)$ uno spazio topologico, diremo che due curve $\gamma_1(x):[0,1] \to X$ e $\gamma_2(x):[0,1] \to X$ sono omotope se esiste una funzione $F(x,t) : [0, 1] \times [0,1] \to X$ tale che
+    \begin{enumerate}
+        \item $F$ è continua;
+        \item $F(x, 0) = \gamma_1(x)$;
+        \item $F(x, 1) = \gamma_2(x)$.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    In generale la nozione di omotopia è una nozione che si dà fra funzioni, non necessariamente alle curve e basta.
+\end{remark}
+\begin{remark}
+    Due curve equivalenti sono omotopicamente equivalenti: infatti abbiamo che la funzione
+    $$
+        F(x, t) = (1-t)\gamma_1(x) + t\gamma_2(f(x)),
+    $$
+    è una funzione continua e
+    \begin{align}
+        &F(x, 0) = \gamma_1(x),& &F(x, 1) = \gamma_2(f(x)).
+    \end{align}
+\end{remark}
+
+La nozione di omotopia è parecchio versatile quando consideriamo l'insieme di tutte le curve chiuse che iniziano e terminano in un punto $x_0 \in X$, che viene denotato in $\Omega(x_0, X)$: è chiaro che
+tutte le varie curve 
