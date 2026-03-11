@@ -430,6 +430,23 @@ Per coerenza, si deve avere che questo elemento qua è ancora "sufficientemente"
     \caption{Rappresentazione del cammino infinitesimo $g_1^{-1} \circ g_2^{-1} \circ g_1 \circ g_2$. Nel caso di un gruppo non abeliano, l'iterazione delle trasformazioni dirette e inverse non riporta esattamente all'identità $e$. Il "gap" residuo è descritto dal commutatore dei generatori.}
 \end{figure}
 
+Si può mostrare che vale l'identità di Jacobi
+\begin{prop}[identità di Jacobi]
+    Sia $G$ un gruppo di Lie e sia $\mathfrak{g}$ con generatori $\{ T^a \} \in \mathfrak{g}$, allora
+    \begin{align}
+        [[T^a, T^b], T^c] + [[T^c, T^a], T^b] + [[T^b, T^c], T^a] = 0.
+    \end{align}
+\end{prop}
+\begin{proof}
+    \begin{align}
+        &[[T^a, T^b], T^c] + [[T^c, T^a], T^b] + [[T^b, T^c], T^a] = \\
+        &=[T^a T^b - T^b T^a, T^c] + [T^c T^a - T^a T^c, T^b] + [T^b T^c - T^c T^b, T^a] = \\
+        &= T^a T^b T^c - T^b T^a T^c - T^c T^a T^b + T^c T^b T^a + \\
+        &+ T^c T^a T^b - T^a T^c T^b - T^b T^c T^a + T^b T^a T^c + \\
+        &+ T^b T^c T^a - T^c T^b T^a - T^a T^b T^c + T^a T^c T^b = 0.   
+    \end{align}
+\end{proof}
+
 \begin{definition}[costanti di gruppo]
     Siano $\{ T^a \}$ i generatori infinitesimi di un gruppo di Lie $G$, allora si ha che
     \begin{align}
