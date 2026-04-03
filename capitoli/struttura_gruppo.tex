@@ -566,7 +566,7 @@ la condizione di hermitianeità (e il fattore $2$ tiene sempre di conto del fatt
 \begin{proof}
     Si osserva che abbiamo $n$ numeri liberi e dalla condizione di trasposizione si ottiene che se
     \begin{align}
-        A = e^(i \alpha^a T^a) \implies A^T A = e^{i \alpha^a (T^t)^a} e^{i \alpha^a T^{a}} = \mathbf{1} \implies e^{i \alpha^a (T^t)^a} = e^{-i \alpha^a T^a}, 
+        A = e^{i \alpha^a T^a} \implies A^T A = e^{i \alpha^a (T^t)^a} e^{i \alpha^a T^{a}} = \mathbf{1} \implies e^{i \alpha^a (T^t)^a} = e^{-i \alpha^a T^a}, 
     \end{align}
     da cui si ha che
     \begin{align}
@@ -664,6 +664,8 @@ Questi sono, principalmente, i seguenti:
     \item teoria delle rappresentazioni. 
 \end{enumerate}
 
+\subsection{I gruppi di omotopia}
+
 Abbiamo già visto le mappe di rivestimento, quindi partiamo a studiare i gruppi di omotopia: questo concetto si presta particolarmente bene negli spazi topologici connessi per archi:
 
 \begin{definition}[spazio topologico]
@@ -679,6 +681,15 @@ Abbiamo già visto le mappe di rivestimento, quindi partiamo a studiare i gruppi
 \begin{definition}[spazio topologico connesso per archi]
     Sia $(X, \tau)$ uno spazio topologico, diremo che è connesso per archi se $\forall x, y \in X, \, \exists \gamma : [0,1] \to X$ tale che $\gamma(0) = x, \gamma(1) = y$.
 \end{definition}
+
+Si osservi che prese due curve $\gamma_1: [0,1] \to X$ e $\gamma_2: [0,1] \to X$ con $\gamma_1(1)=\gamma_2(0)$ allora considerare la curva $\gamma = \gamma_1 \ast \gamma_2$ così definita
+\begin{align}
+    \gamma(t) = \begin{cases}
+        \gamma_1(2t) & \text{se } 0 \leq t \leq \frac{1}{2}; \\
+        \gamma_2(2(t - \frac{1}{2})) & \text{se } \frac{1}{2} \leq t \leq 1.
+    \end{cases}
+\end{align}
+e quindi definire l'operazione di composizione di due curve $\ast$, che non gode, chiaramente, di proprietà associativa come vedremo sotto.
 
 Prese due curve su uno spazio $X$, possiamo dare la nozione di equivalenza di una curva
 \begin{definition}[curve equivalenti]
@@ -728,5 +739,304 @@ Possiamo dare, tuttavia, una nozione più forte dell'equivalenza fra curva, ovve
     \end{align}
 \end{remark}
 
-La nozione di omotopia è parecchio versatile quando consideriamo l'insieme di tutte le curve chiuse che iniziano e terminano in un punto $x_0 \in X$, che viene denotato in $\Omega(x_0, X)$: è chiaro che
-tutte le varie curve 
+La nozione di omotopia è parecchio versatile quando consideriamo l'insieme di tutte le curve chiuse che iniziano e terminano in un punto $x_0 \in X$, che viene denotato $\Omega(x_0, X)$: è chiaro che, in un insieme connesso per archi,
+presi due punti, tale insieme dipende anche dalle curve che vivono in un altro punto; siccome le curve chiuse attorno ad un punto possono essere costruite prendendo la curva continua $\gamma$ che connette il punto $x_0$ e $x_1$ e "sommarla" con una curva chiusa attorno a $x_1$ e
+percorrere la curva $\gamma$ al contrario. Si potrebbe dimostrare che questo insieme non ha la struttura di gruppo rispetto all'operazione di composizione di curve: intuitivamente, le curve
+\begin{align}
+    &(\gamma \ast \lambda) \ast \mu, & &\gamma \ast (\lambda \ast \mu),
+\end{align}
+sono curve differenti, anche se fanno lo stesso percorso, perché hanno velocità diversa nel compiere i vari giri, però sono omotopicamente equivalenti.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        midarrow/.style={postaction={decorate, decoration={markings, mark=at position 0.5 with {\arrow{Latex}}}}},
+        quarterarrow/.style={postaction={decorate, decoration={markings, mark=at position 0.25 with {\arrow{Latex}}}}},
+        thirdquarterarrow/.style={postaction={decorate, decoration={markings, mark=at position 0.75 with {\arrow{Latex}}}}}
+    ]
+        % Ellisse di sfondo
+        \draw[fill=gray!10, thick] (0,0) ellipse (5cm and 2cm);
+        \node[font=\large] at (-1, -2.5) {$X$};
+        
+        % Curva originale da x_0 a x_1 con freccia nel mezzo
+        \draw[midarrow, ultra thick, opacity=0.5, red!60!blue] 
+        (-1,-0.7) to (1, 0.3);
+        
+        % Curva inversa da x_1 a x_0 con freccia nel mezzo
+        % Ho impostato gli angoli di uscita (out) ed entrata (in) in modo che formi un "ciclo" visivo
+        \draw[midarrow, ultra thick, opacity=0.5, red!60!blue] 
+        (1, 0.4) to (-1, -0.6);
+        
+        % Nodi (etichette)
+        \node[font=\large] at (-1, -1) {$x_0$};
+        \node[font=\large] at (1.4, 0.5) {$x_1$};
+        
+        % Punti (cerchi neri)
+        \draw[fill=black] (-1, -0.7) circle (0.1cm and 0.1cm);
+        \draw[fill=black] (1, 0.3) circle (0.1cm and 0.1cm);
+        
+        % Cerchio finale
+        \draw[quarterarrow, thirdquarterarrow, ultra thick, opacity=0.5, red!60!blue] (2, 0.3) circle (1cm);
+    \end{tikzpicture}
+    \caption{Costruzione di un cammino chiuso attorno ad $x_0$ usando una curva chiusa di $x_1$: questo ci fa ipotizzare che ci sia un qualche tipo di legame fra $\Omega(x_0, X)$ e $\Omega(x_1, X)$.}
+\end{figure}
+
+Per ottenere la struttura di gruppo, si potrebbe andare a quozientare l'insieme delle curve all'interno di $\Omega(x_0, X)$ con la relazione di omotopia (è facile verificare che si tratta di una relazione d'equivalenza) e, in tal caso, si riacquista anche la proprietà associativa se definiamo la composizione di curve
+sulle classi di equivalenza omotopica delle curve.
+
+\begin{definition}[gruppo fondamentale]
+    Sia $(X, \tau)$ uno spazio topologico, diremo che il gruppo delle classi omotopiche di cammini orientabili in $\Omega(x_0, X)$ è il grupo fondamentale $\pi_1(x_0, X)$.  
+\end{definition}
+
+Il fatto più importante, tuttavia, che bisogna ricordare è il fatto che per un insieme connesso per archi, $\pi_1(x_0, X)$ non dipende dal punto $x_0 \in X$ preso\footnote{più precisamente, preso $(X, \tau)$ spazio topologico connesso per archi e $x_0, x_1 \in X$ con $x_0 \neq x_1$, allora esiste un isomorfismo
+fra $\pi_1(x_0, X)$ e $\pi_1(x_1, X)$.}, dunque per spazi topologici connessi per archi $(X, \tau)$ indicheremo il gruppo fondamentale direttamente con
+
+\begin{align}
+    \pi_1(X).
+\end{align}
+
+\begin{remark}
+    Se fossimo in un insieme non connesso per archi, potremmo comunque restringerci alle componenti connesse per archi e lì possiamo usare il fatto che il gruppo fondamentale non dipende dal punto `preciso' preso in quella componente connessa
+\end{remark}
+
+A questo punto si potrebbe generalizzare il ragionamento appena fatto per introdurre i gruppi di omotopia superiore:
+\begin{definition}[Gruppi di omotopia superiore]
+    L'$i$-esimo gruppo di omotopia $\pi_i(X, x_0)$ è l'insieme delle classi di omotopia delle mappe continue da $S^i$ a $X$ aventi come punto base $x_0$. Equivalentemente, possiamo definire il gruppo di omotopia superiore usando le classi di omotopia di mappe da $D^i$ a $X$ tali che il bordo venga mappato nel punto base, ovvero $f(S^{i-1}) = \{x_0\}$.
+\end{definition}
+
+Possiamo facilmente mostrare che su tale insieme è possibile andare a definire un `prodotto' di mappe che gli dà una struttura di gruppo. Prima di farlo, è necessario il seguente risultato:
+
+\begin{theorem}
+    Se $A, B$ sono spazi topologici (con rispettivamente $\tau_A$ e $\tau_B$ le due topologie) e se $f: A \to B$ è una mappa continua fra i due tale che $f = g \circ h$ con $h: A \to C$ e $g: C \to B$, e con $C$ spazio topologico contraibile, allora $f$ è omotopa alla mappa costante.
+\end{theorem}
+\begin{proof}[Idea della dimostrazione]
+    Ci si può convincere di ciò poiché posso costruire l'omotopia fra la funzione $f$ e la mappa costante considerando:
+    \begin{align}
+        H(x, t) = g(C(h(x), t)),
+    \end{align}
+    dove $C(y, t)$ è l'omotopia garantita dal fatto che lo spazio $C$ è contraibile (ovvero deformabile con continuità ad un punto base).
+\end{proof}
+
+Prima di andare avanti, è comodo definire la mappa $\psi: S^i \to S^i_1 \vee S^i_2$: per capire cosa fa questa mappa, immaginate di avere una sfera e di separarla sull'equatore. In topologia, quozientare un insieme rispetto a dei punti vuol dire farli incollare: un esempio può essere un rettangolo che può diventare un cilindro se incollate una sola coppia di lati paralleli, come si può vedere in figura.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[>=stealth, thick]
+        % Definizione dello stile freccia
+        \tikzset{arrow/.style={->, thick, blue}}
+        
+        % Rettangolo iniziale
+        \draw[draw=black] (0,0) rectangle ++(3,5);
+        
+        % Frecce sui lati per indicare l'incollaggio (stesso verso)
+        \draw[arrow] (0, 1.5) -- (0, 3.5);
+        \draw[arrow] (3, 1.5) -- (3, 3.5);
+        
+        % Freccia che indica la trasformazione (quoziente)
+        \draw[->] (4, 2.5) -- (5.5, 2.5) node[midway, above] {quoziente};
+        
+        % Cilindro risultante
+        \begin{scope}[shift={(7.5, 0)}]
+            % Base inferiore (ellisse a metà tratteggiata)
+            \draw (-1.5,0) arc (180:360:1.5 and 0.5);
+            \draw[dashed, opacity=0.5] (1.5,0) arc (0:180:1.5 and 0.5);
+            
+            % Base superiore (ellisse completa)
+            \draw (0,5) ellipse (1.5 and 0.5);
+            
+            % Lati verticali esterni del cilindro
+            \draw (-1.5,0) -- (-1.5,5);
+            \draw (1.5,0) -- (1.5,5);
+            
+            % Linea di "cucitura" sul cilindro dove i lati si sono uniti
+            \draw[dashed, blue] (0, -0.5) -- (0, 4.5);
+            \draw[arrow] (0, 1.5) -- (0, 3.5);
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Quoziente di un rettangolo: incollare una coppia di lati paralleli per ottenere un cilindro.}
+\end{figure}
+
+Nel caso della sfera, quozientare tutto l'equatore in un punto equivale a chiudere la calotta sferica superiore e inferiore in un punto comune: è come se strizzassi con continuità l'equatore fino a farlo diventare un singolo punto. Da una sfera se ne ottengono due che hanno il punto $s_0$ (il punto base) in comune. 
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[>=stealth, thick]
+        % Sfera originale S^i
+        \draw (0,0) circle (1.5);
+        % Equatore (davanti e dietro)
+        \draw (-1.5,0) arc (180:360:1.5 and 0.4);
+        \draw[dashed, opacity=0.5] (1.5,0) arc (0:180:1.5 and 0.4);
+        \node at (0, 2) {$S^i$};
+        
+        % Freccia della mappa
+        \draw[->] (2.5,0) -- (4.5,0) node[midway, above] {$\psi$};
+        
+        % Sfera quozientata (Wedge sum S^i_1 \vee S^i_2)
+        \begin{scope}[shift={(7,0)}]
+            % Sfera superiore
+            \draw (0, 0.8) circle (0.8);
+            \draw (-0.8, 0.8) arc (180:360:0.8 and 0.2);
+            \draw[dashed, opacity=0.5] (0.8, 0.8) arc (0:180:0.8 and 0.2);
+            \node at (0, 2) {$S^i_1$};
+            
+            % Sfera inferiore
+            \draw (0, -0.8) circle (0.8);
+            \draw (-0.8, -0.8) arc (180:360:0.8 and 0.2);
+            \draw[dashed, opacity=0.5] (0.8, -0.8) arc (0:180:0.8 and 0.2);
+            \node at (0, -2) {$S^i_2$};
+            
+            % Punto di incollaggio (equatore collassato)
+            \filldraw (0,0) circle (1.5pt) node[right, xshift=5mm] {equatore collassato};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{La mappa $\psi$ che collassa l'equatore della sfera $S^i$.}
+\end{figure}
+Effettuare le dimostrazioni (come l'associatività e l'esistenza dell'inverso) direttamente su una sfera è abbastanza \emph{tricky} e complicato per via della geometria dei domini. Per semplificare enormemente la costruzione, si usa il fatto che $D^i$ è omeomorfo al cubo $[-1, 1]^i$ (o, a meno di traslazioni, a $[0,1]^i$)\footnote{Un quadrato è omeomorfo alla palla chiusa, ovvero sono topologicamente equivalenti. È abbastanza semplice far vedere questo poiché,
+preso un punto su una palla, posso considerare $f: D^i \to [-1,1]^i$ definita nel seguente modo:
+\begin{align}
+    f(x) = \begin{cases}
+        x\frac{||x||_2}{||x||_{\infty}} & \text{se } x \neq 0 \\
+        0 & \text{se } x = 0
+    \end{cases},
+\end{align}
+dove $||x||_\infty = \max_i{|x_i|}$ ed è facile far vedere che questa funzione è continua rispetto a $||\cdot||_{\infty}$ (infatti la topologia sul quadrato è quella data dalla norma del massimo, quindi devo mostrare la continuità con quella) in $x=0$ poiché
+\begin{align}
+    ||f(x) - f(0)||_{\infty} = ||f(x)||_{\infty} = \left|\left|x\frac{||x||_2}{||x||_{\infty}}\right|\right|_{\infty} = ||x||_{\infty} \frac{||x||_2}{||x||_\infty} = ||x||_2 \to 0 \text{ per } x \to 0,
+\end{align}
+e il mapping inverso $f^{-1}: [-1, 1]^i \to D^i$ è dato da:
+\begin{align}
+    f^{-1}(z) = \begin{cases}
+        z \frac{||z||_{\infty}}{||z||_2} & \text{se } z \neq 0 \\
+        0 & \text{se } z = 0.
+    \end{cases},
+\end{align}
+e possiamo procedere similmente a quanto fatto sopra per la continuità di $f$ per mostrare che anche $f^{-1}$ è continua. Per quanto riguarda la bigettività, osserviamo che
+\begin{align}
+    (f \circ f^{-1})(z) = f\left(z \frac{||z||_{\infty}}{||z||_2}\right) = z \frac{||z||_{\infty}}{||z||_2} \frac{\left|\left|z \frac{||z||_{\infty}}{||z||_{2}}\right|\right|_{2}}{\left|\left| z \frac{||z||_{\infty}}{||z||_{2}} \right|\right|_\infty} = z,
+\end{align}
+dunque $f \circ f^{-1} = \id_{[-1, 1]^i}$ e similmente si procede per vedere che $f^{-1} \circ f = \id_{D^i}$.
+}.
+ 
+Lavorando sul dominio a coordinate $I^i = I^{i-1} \times [0,1]$, indicando un punto generico con $(x, s)$ dove $x \in I^{i-1}$ e $s \in [0,1]$, il prodotto di due mappe $\alpha, \beta \in \pi_i(X)$ è così definito:
+\begin{align}
+    (\alpha \circ \beta)(x, s) = \begin{cases}
+        \alpha(x, 2s) & \text{se } 0 \leq s \leq \frac{1}{2} \\
+        \beta(x, 2s-1) & \text{se } \frac{1}{2} < s \leq 1
+    \end{cases}.
+\end{align}
+
+Siamo pronti per mostrare che questo spazio ha la struttura di gruppo: cercherò per quanto possibile di rifarmi alla definizione "sferica" del concetto (che Konishi ha usato in classe), ma per l'associatività sarò costretto ad andare nel cubo $i-$dimensionale.
+\begin{theorem}
+    Sia $X$ uno spazio topologico (o una varietà) e sia $\pi_j(X, x_0)$ il gruppo $j$-esimo di omotopia con $j \geq 2$. Se indichiamo con $\psi: S^i \to S^i_1 \vee S^i_2$ la mappa di schiacciamento spiegata sopra, l'emisfero positivo $D^+=\{(x^0, \ldots, x^{i}) \in \mathbb{R}^{i+1}: (x^0)^2 + \ldots + (x^i)^2 = 1, x^0 \geq 0 \}$, l'emisfero negativo $D^-=\{ (x^0, \ldots, x^{i}) \in \mathbb{R}^{i+1}: (x^0)^2 + \ldots + (x^i)^2 = 1, x^0 \leq 0 \}$ e definiamo il prodotto di mappe $\alpha, \beta \in \pi_j(X, x_0)$ come
+    \begin{align}
+        (\alpha \cdot \beta)(x) = \begin{cases}
+            \alpha(\psi(x)) & \text{se } x \in D^+, \\
+            \beta(\psi(x)) & \text{se } x \in D^-
+        \end{cases},
+    \end{align} 
+    allora:
+    \begin{enumerate}[label=\protect\circled{\arabic*}]
+        \item $\pi_j(X, x_0)$ è un gruppo rispetto a $\cdot$;
+        \item $\pi_j(X, x_0)$ è un gruppo abeliano. 
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Mostriamo la $\circled{1}$: per farlo è necessario mostrare l'associatività, l'esistenza dell'elemento neutro e l'esistenza dell'elemento inverso. 
+    
+    \textbf{Associatività:} Possiamo immaginare che $D^-$ sia separato a sua volta in due regioni: $D^- = D^-_1 \cup D^-_2$ con $x^1 \leq 0$ in $D^-_1$ e $x^1 \geq 0$ in $D^-_2$. Possiamo quindi definire una mappa $\tilde{\psi}$ che collassa in un singolo punto $s_0$ sia l'equatore sia il semicerchio che separa $D^-_1$ e $D^-_2$, ottenendo una struttura "a trifoglio". Con questo modello geometrico, l'omotopia che manda $\alpha \cdot (\beta \cdot \gamma)$ in $(\alpha \cdot \beta) \cdot \gamma$ corrisponde a far scivolare con continuità i "muri" di separazione sulla sfera originale.
+    
+    \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[>=stealth, thick]
+      \tikzset{dashed line/.style={dashed, opacity=0.6}}
+      \tikzset{solid line/.style={solid}}
+
+      \begin{scope}[shift={(-2.5, 0)}]
+        \draw (0, 0) circle (1.5);
+        \node at (0, 1.8) {\(S^i\)};
+        \draw[dashed line] (-1.5, 0) arc (180:0:1.5 and 0.4);
+        \draw[solid line] (1.5, 0) arc (0:-180:1.5 and 0.4);
+        \draw[solid line] (0, -0.4) to[bend right=30] (0, -1.5);
+        \draw[dashed line] (0, -0.4) to[bend left=30] (0, -1.5);
+      \end{scope}
+
+      \draw[->] (-0.8, 0) -- (1.0, 0) node[midway, above] {\(\tilde{\psi}\)};
+
+      \begin{scope}[shift={(4, 0)}]
+        \def\rsmall{0.9}
+        \def\rcos{0.7794}
+        \def\rsin{0.45}
+        \coordinate (C1) at (0, \rsmall);
+        \coordinate (C2) at (-\rcos, -\rsin);
+        \coordinate (C3) at (\rcos, -\rsin);
+
+        \begin{scope}[shift={(C1)}]
+          \draw circle (\rsmall);
+          \node at (0, \rsmall + 0.3) {\(S^i_1\)};
+          \node at (0, 0) {\(\alpha\)};
+          \draw[dashed line] (-\rsmall, 0) arc (180:0:{\rsmall} and 0.25);
+          \draw[solid line] (\rsmall, 0) arc (0:-180:{\rsmall} and 0.25);
+        \end{scope}
+
+        \begin{scope}[shift={(C2)}]
+          \draw circle (\rsmall);
+          \node at (-0.3, -\rsmall - 0.3) {\(S^i_2\)};
+          \node at (0, 0) {\(\beta\)};
+          \draw[dashed line] (-\rsmall, 0) arc (180:0:{\rsmall} and 0.25);
+          \draw[solid line] (\rsmall, 0) arc (0:-180:{\rsmall} and 0.25);
+        \end{scope}
+
+        \begin{scope}[shift={(C3)}]
+          \draw circle (\rsmall);
+          \node at (0.3, -\rsmall - 0.3) {\(S^i_3\)};
+          \node at (0, 0) {\(\gamma\)};
+          \draw[dashed line] (-\rsmall, 0) arc (180:0:{\rsmall} and 0.25);
+          \draw[solid line] (\rsmall, 0) arc (0:-180:{\rsmall} and 0.25);
+        \end{scope}
+
+        \draw[fill=black, thick] (0, 0) circle (0.05);
+        \node[right, xshift=20mm, yshift=-4mm, text width=5cm, align=left] at (0,0) {\small equatore e meridiano collassati in \(s_0\)};
+      \end{scope}
+    \end{tikzpicture}
+    \caption{Trifoglio topologico generato dalla mappa di schiacciamento potenziata $\tilde{\psi}$.}
+    \end{figure}
+
+    Per scrivere in modo esplicito l'omotopia dell'associatività in termini puramente algebrici, è d'uso parametrizzare l'operazione tramite la coordinata di concatenazione $s \in [0,1]$ (che equivale a lavorare su un cubo che su una sfera). L'omotopia $H(x, s, t)$ muove i confini temporali dei tre raggruppamenti:
+    \begin{align}
+        H(x, s, t) = \begin{cases}
+            \alpha\left(x, \, \frac{4s}{2-t}\right) & \text{se } 0 \leq s \leq \frac{2-t}{4} \\[8pt]
+            \beta\Big(x, \, 4s - 2 + t\Big) & \text{se } \frac{2-t}{4} \leq s \leq \frac{3-t}{4} \\[8pt]
+            \gamma\left(x, \, \frac{4s - 3 + t}{1+t}\right) & \text{se } \frac{3-t}{4} \leq s \leq 1
+        \end{cases}
+    \end{align}
+    A $t=0$ questa formula restituisce esattamente $\alpha \cdot (\beta \cdot \gamma)$, mentre a $t=1$ restituisce $(\alpha \cdot \beta) \cdot \gamma$, garantendo l'incollatura nei punti di separazione per ogni $t$.
+
+    \textbf{Elemento neutro:} Mostriamo che $\alpha \cdot f \sim c_{x_0} \cdot f$, dove $\alpha$ è omotopa alla funzione costante $c_{x_0}$. L'omotopia esplicita può essere scritta facilmente utilizzando la mappa $\psi: S^i \to S^i_1 \vee S^i_2$ nel seguente modo:
+    \begin{align}
+        H(x, t) = \begin{cases}
+            C(\psi(x), t) & \text{se } \psi(x) \in S^i_1 \\
+            f(\psi(x)) & \text{se } \psi(x) \in S^i_2
+        \end{cases},
+    \end{align}
+    dove $C: S^i \times [0,1] \to X$ è l'omotopia garantita dal fatto che $\alpha \sim c_{x_0}$, tale che $C(y, 0) = \alpha(y)$ e $C(y, 1) = x_0$. Chiaramente, al tempo $t=0$ otteniamo $H(x, 0) = (\alpha \cdot f)(x)$, mentre al tempo $t=1$ l'intera palla superiore è mappata in $x_0$, restituendo $H(x, 1) = (c_{x_0} \cdot f)(x)$. Di conseguenza $\alpha \cdot f \sim c_{x_0} \cdot f$. 
+    
+    Resta da mostrare che $c_{x_0} \cdot f \sim f$. Geometricamente, sul dominio sferico $S^i$, la mappa $c_{x_0} \cdot f$ è costantemente uguale a $x_0$ sull'emisfero nord, ed equivale alla mappa $f$ sull'emisfero sud. L'omotopia tra questa mappa e $f$ consiste nel far "scivolare" l'equatore in modo continuo verso il Polo Nord. Utilizzando nuovamente la coordinata di parametrizzazione $s \in [0,1]$, l'omotopia esplicita che dilata il dominio di $f$ fino a fargli occupare tutto lo spazio è:
+    \begin{align}
+        K(x, s, t) = \begin{cases}
+            x_0 & \text{se } 0 \leq s \leq \frac{1-t}{2} \\[6pt]
+            f\left(x, \, \frac{2s - 1 + t}{1+t}\right) & \text{se } \frac{1-t}{2} \leq s \leq 1
+        \end{cases}
+    \end{align}
+    Al tempo $t=0$, $K$ vale $c_{x_0} \cdot f$, mentre al tempo $t=1$ il termine di separazione collassa a $0$ e l'espressione diventa $K(x, s, 1) = f(x, s)$. Questo dimostra rigorosamente che $[c_{x_0} \cdot f] = [f]$.
+
+    \textbf{Elemento inverso:} Posso considerare la mappa $(x^0, \ldots, x^i) \stackrel{\bar{\alpha}}{\mapsto} \alpha(-x^0, \ldots, x^i)$ ed osservare che in questa maniera:
+    \begin{align}
+        (\alpha \cdot \bar{\alpha})(x^0, \ldots, x^i) = \begin{cases}
+            \alpha(x^0, \ldots, x^i) & \text{se } x^0 \geq 0 \\
+            \alpha(-x^0, \ldots, x^i) & \text{se } x^0 < 0
+        \end{cases}
+    \end{align}
+    Questa costruzione fa in modo che i punti $x = (x^0, \ldots, x^i)$ e $x^* = (-x^0, \ldots, x^i)$ vengano mappati nello stesso valore. Si ha quindi $\alpha \cdot \bar{\alpha} = \alpha \cdot \pi$, con $\pi: S^i \to D^i$ che è la proiezione che schiaccia la sfera sul disco equatoriale. Poiché $D^i$ è uno spazio contraibile, per il teorema introdotto precedentemente la composizione $\alpha \cdot \pi$ è omotopa alla mappa costante $c_{x_0}$. \newline
+
+    Mostriamo infine la $\circled{2}$: per farlo osserviamo che una rotazione continua attorno al complemento ortogonale del piano $(x_0, x_1)$ scambia con continuità $D^+$ con $D^-$. Questo movimento definisce l'omotopia desiderata, dimostrando che $\alpha \cdot \beta \sim \beta \cdot \alpha$.
+\end{proof}
