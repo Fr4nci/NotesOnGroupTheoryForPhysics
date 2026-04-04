@@ -590,7 +590,7 @@ la condizione di hermitianeità (e il fattore $2$ tiene sempre di conto del fatt
 \end{remark}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{immagini/gen_so_su.pdf}
+    \includegraphics[width=0.7\textwidth]{immagini/gen_so_su.pdf}
     \caption{Numero di generatori di $\text{SO}(n)$ e $\text{SU}(n')$. Si vede che per $n=1, n=3$ e $n=6$ abbiamo, rispettivamente, che i generatori di $SU(n')$ sono $n' = 1, n'=2$ e $n' = 4$: è possibile mostrare sono tutti valori per cui le algebre rispettive sono isomorfe.}
 \end{figure}
 \subsection{Sottoalgebre}
@@ -682,6 +682,17 @@ Abbiamo già visto le mappe di rivestimento, quindi partiamo a studiare i gruppi
     Sia $(X, \tau)$ uno spazio topologico, diremo che è connesso per archi se $\forall x, y \in X, \, \exists \gamma : [0,1] \to X$ tale che $\gamma(0) = x, \gamma(1) = y$.
 \end{definition}
 
+Per uno spazio topologico in generale, si introduce $\pi_0(X)$ che quantifica il numero di componenti connesse del gruppo
+\begin{definition}
+    Sia $(M, \tau)$ uno spazio topologico, allora
+    \begin{align}
+        \pi_0(M) = \begin{cases}
+            1 & \text{è connesso per archi} \\
+            > 1 & \text{è disconnesso per archi con } \pi_0(M) \text{ componenti}
+        \end{cases}.
+    \end{align}
+\end{definition}
+
 Si osservi che prese due curve $\gamma_1: [0,1] \to X$ e $\gamma_2: [0,1] \to X$ con $\gamma_1(1)=\gamma_2(0)$ allora considerare la curva $\gamma = \gamma_1 \ast \gamma_2$ così definita
 \begin{align}
     \gamma(t) = \begin{cases}
@@ -693,7 +704,7 @@ e quindi definire l'operazione di composizione di due curve $\ast$, che non gode
 
 Prese due curve su uno spazio $X$, possiamo dare la nozione di equivalenza di una curva
 \begin{definition}[curve equivalenti]
-    Siano $\gamma_1 : [a,b] \to X$ e $\gamma_2 : [c,d] \to X$ con $\gamma_1(0) = \gamma_2(0)$ e $\gamma_1(1) = \gamma_2(1)$, diremo che $\gamma_1(t)$ è equivalente a $\gamma_2(\tau)$ se esiste $f(t) \in C^1([a, b], [c,d])$ tale che $\tau(a) = c, \tau(b) = d$ e $\tau = f(t)$ con $f'(t) > 0 \, \forall t \in [a,b]$ oppure, equivalentemente, si ha che
+    Siano $\gamma_1 : [a,b] \to X$ e $\gamma_2 : [c,d] \to X$ con $\gamma_1(a) = \gamma_2(c)$ e $\gamma_1(b) = \gamma_2(d)$, diremo che $\gamma_1(t)$ è equivalente a $\gamma_2(\tau)$ se esiste $f(t) \in C^1([a, b], [c,d])$ tale che $\tau(a) = c, \tau(b) = d$ e $\tau = f(t)$ con $f'(t) > 0 \, \forall t \in [a,b]$ oppure, equivalentemente, si ha che
     \begin{align}
         \gamma_1(t) = \gamma_2(\tau(t)).
     \end{align}
@@ -715,10 +726,10 @@ Prese due curve su uno spazio $X$, possiamo dare la nozione di equivalenza di un
     e chiaramente $f(t)$ è $C^1([0, 2], [0, \sqrt{2}])$, dunque le due curve sono equivalenti
 \end{example}
 
-Possiamo dare, tuttavia, una nozione più forte dell'equivalenza fra curva, ovvero l'\emph{omotopia} fra esse
+Possiamo dare, tuttavia, una nozione più debole dell'equivalenza fra curva, ovvero l'\emph{omotopia} fra esse
 
 \begin{definition}[omotopia fra curve]
-    Sia $(X, \tau)$ uno spazio topologico, diremo che due curve $\gamma_1(x):[0,1] \to X$ e $\gamma_2(x):[0,1] \to X$ sono omotope se esiste una funzione $F(x,t) : [0, 1] \times [0,1] \to X$ tale che
+    Sia $(X, \tau)$ uno spazio topologico, diremo che due curve $\gamma_1(x):[0,1] \to X$ e $\gamma_2(x):[0,1] \to X$ con $\gamma_1(0) = \gamma_2(0)$ e $\gamma_1(1) = \gamma_2(1)$ sono omotope se esiste una funzione $F(x,t) : [0, 1] \times [0,1] \to X$ tale che
     \begin{enumerate}
         \item $F$ è continua;
         \item $F(x, 0) = \gamma_1(x)$;
@@ -784,6 +795,40 @@ sono curve differenti, anche se fanno lo stesso percorso, perché hanno velocit�
 Per ottenere la struttura di gruppo, si potrebbe andare a quozientare l'insieme delle curve all'interno di $\Omega(x_0, X)$ con la relazione di omotopia (è facile verificare che si tratta di una relazione d'equivalenza) e, in tal caso, si riacquista anche la proprietà associativa se definiamo la composizione di curve
 sulle classi di equivalenza omotopica delle curve.
 
+
+\begin{lemma}[lemma dell'incollamento]
+    Sia $(X, \tau_X)$ e $(Y, \tau_Y)$ uno spazio topologico e sia $\{ C_i \}_{i \in I}$ una collezione finita ($I = \{ 1, \ldots, n\}$ con $n < +\infty$) di insiemi chiusi ($\iff \forall i \in I, C_i^c \in \tau_X$) e sia $f: X \to Y$ una funzione continua tale che $f|_{C_i}$ è continua $\forall i$, allora $f|_{\bigcup_{i \in I} C_i}$ è continua.   
+\end{lemma}
+\begin{proof}
+    La dimostrazione è straightforward: abbiamo infatti che una funzione è continua su $C_i$ se e solo se per ogni per ogni chiuso $V \subseteq f(C_i)$, $(f|_{C_i})^{-1}(V) = f^{-1}(V) \cap C_i = U_i$ è chiuso in $\tau_X$, tuttavia si osservi che
+    \begin{align}
+        (f|_C)^{-1}(V) = C \cap f^{-1}(V) = \left( \bigcup_{i \in I} C_i \right) \cap f^{-1}(V) = \bigcup_{i \in I} (C_i \cap f^{-1}(V)) = \bigcup_{i \in I} U_i,
+    \end{align}
+    ma si tratta di un'unione finita di chiusa, dunque è ancora chiusa. Segue che $f|_C$ è continua.
+\end{proof}
+
+\begin{prop}
+    L'omotopia è una relazione d'equivalenza.
+\end{prop}
+\begin{proof}
+    E' necessario mostrare che la vale la proprietà riflessiva, simmetrica e transitiva. La proprietà riflessiva è banale, poiché presa una funzione/curva $\alpha$ allora la funzione
+    \begin{align}
+        F(x, t) = \alpha(x),
+    \end{align}
+    è tale che $F(x, 0) = \alpha(x)$ e $F(x, 1) = \alpha(x)$, dunque $\alpha \sim \alpha$. Per la simmetrica è comunque facile: siano infatti $\alpha$ e $\beta$ due funzioni/curve, allora se $\alpha \sim \beta \implies \exists F: M \times [0,1]$ tale che $F(\cdot, 0) = \alpha(\cdot)$ e $F(\cdot, 1) = \beta(\cdot)$, dunque definendo
+    \begin{align}
+        \tilde{F}(x, t) = F(x, 1-t),
+    \end{align}
+    si ottiene che $\tilde{F}(x, 0) = F(x, 1) = \beta(x)$ e $\tilde{F}(x, 1) = F(x, 0) = \alpha(x)$, dunque $\beta \sim \alpha$. Per quanto riguarda la proprietà transitiva, se $\alpha \sim \beta$ e $\beta \sim \gamma$ allora posso definire
+    \begin{align}
+        H(x, t) = \begin{cases}
+            F(x, 2t) & 0 \leq t \leq \frac{1}{2} \\
+            G(x, 2 - 2t) & \frac{1}{2} < t \leq 1 \\
+        \end{cases},
+    \end{align}
+    dove $F: M \times [0,1] \to M$ e $G: M \times [0,1] \to M$ sono le omotopie fra $\alpha$ e $\beta$ e $\beta$ e $\gamma$ rispettivamente. Tale funzione è continua per il \emph{lemma dell'incollamento} e $H(x, 0) = \alpha(x)$ e $H(x, 1) = \gamma(x) \implies \alpha \sim \gamma$.
+\end{proof}
+
 \begin{definition}[gruppo fondamentale]
     Sia $(X, \tau)$ uno spazio topologico, diremo che il gruppo delle classi omotopiche di cammini orientabili in $\Omega(x_0, X)$ è il grupo fondamentale $\pi_1(x_0, X)$.  
 \end{definition}
@@ -819,7 +864,7 @@ Possiamo facilmente mostrare che su tale insieme è possibile andare a definire 
 
 Prima di andare avanti, è comodo definire la mappa $\psi: S^i \to S^i_1 \vee S^i_2$: per capire cosa fa questa mappa, immaginate di avere una sfera e di separarla sull'equatore. In topologia, quozientare un insieme rispetto a dei punti vuol dire farli incollare: un esempio può essere un rettangolo che può diventare un cilindro se incollate una sola coppia di lati paralleli, come si può vedere in figura.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[>=stealth, thick]
         % Definizione dello stile freccia
@@ -858,7 +903,7 @@ Prima di andare avanti, è comodo definire la mappa $\psi: S^i \to S^i_1 \vee S^
 
 Nel caso della sfera, quozientare tutto l'equatore in un punto equivale a chiudere la calotta sferica superiore e inferiore in un punto comune: è come se strizzassi con continuità l'equatore fino a farlo diventare un singolo punto. Da una sfera se ne ottengono due che hanno il punto $s_0$ (il punto base) in comune. 
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[>=stealth, thick]
         % Sfera originale S^i
@@ -1040,3 +1085,65 @@ Siamo pronti per mostrare che questo spazio ha la struttura di gruppo: cercherò
 
     Mostriamo infine la $\circled{2}$: per farlo osserviamo che una rotazione continua attorno al complemento ortogonale del piano $(x_0, x_1)$ scambia con continuità $D^+$ con $D^-$. Questo movimento definisce l'omotopia desiderata, dimostrando che $\alpha \cdot \beta \sim \beta \cdot \alpha$.
 \end{proof}
+
+Prima di passare ai gruppi di monodromia, è interessante guardare alcuni insiemi e valutare il loro gruppo fondamentale: si consideri per esempio $S^1$, dove i cammini che possiamo fare sono quelli omotopicamente equivalenti ad un punto oppure uno, due, tre, qua e così via giri. Risulta quindi intuitivo dire che
+\begin{prop}
+    \begin{equation}
+        \pi_1(S^1) = \mathbb{Z}.
+    \end{equation}
+\end{prop}
+Non daremo una dimostrazione formale del fatto, tuttavia si potrebbe provare, per esempio, a costruire la seguente omotopia, fissando un punto base $p \in S^1$ e considerando la curva $\gamma: [0,1] \to S^1$ con $\gamma(0) = p$ e $\gamma(1) = p$ che fa $n$ avvolgimenti,
+\begin{align}
+    F(x, t) = \begin{cases}
+        p & t = 1, \\
+        \gamma((1-t)x) & t \neq 1,
+    \end{cases}
+\end{align}
+tuttavia questa omotopia non rispetta gli estremi nella deformazione continua di $\gamma$. Per quanto riguarda $\mathbb{R}^3$ a cui togliamo una retta, di fatto, è come se noi rendessimo tutto il nostro spazio equivalente a $S^1$: ciò che conta qua è il numero di avvolgimenti che uno curva fa attorno a questo palo infinito (rimosso dallo spazio), dunque risulta anche qua naturale dire che
+\begin{align}
+    \pi_1(\mathbb{R}^3 \setminus \mathbb{R}) = \mathbb{Z},
+\end{align}
+e similmente pure
+\begin{align}
+    \pi_1(\mathbb{R}^3 \setminus S^1) = \mathbb{Z}.
+\end{align}
+La situazione, invece, si fa più complicata per quando riguarda $\mathbb{R}^3 \setminus \{ a, b \}$, con $a$ e $b$ rette. In questo caso, ciò che conta è il numero di avvolgimenti che si fanno sia attorno ad una retta che attorno a quell'altra: si potrebbe mostrare che\footnote{tramite un risultato noto come teorema di Van Kampfen} lo spazio è equivalente a due cerchi incollati in un punto (come fatto per la dimostrazione sui gruppi di omotopia superiori), ovvero risulta che
+\begin{align}
+    \pi_1(\mathbb{R}^3 \setminus \{ a, b\}) = \pi_1(S \vee S) = \mathbb{Z} \ast \mathbb{Z},
+\end{align}
+dove $\ast$, prende il nome di prodotto libero: questo serve per indicare che l'ordine con cui si avvolgono i buchi e anche la sequenza con cui si fanno è importante.  Questa situazione è ben diversa dal toro, dove
+\begin{align}
+    \pi_1(T) = \pi_1(S^1 \times S^1) = \mathbb{Z} \times \mathbb{Z},
+\end{align}
+dove il fatto che ci sia il prodotto cartesiano ci assicura senza problemi che l'ordine in cui si eseguono i cammini non è importante.
+
+Gli ultimi spazi che introduciamo sono gli spazi proiettivi
+\begin{definition}[spazio proiettivo reale o complesso]
+    Si consideri $\mathbb{R}^{n+1}$, introduciamo la seguente relazione d'equivalenza: presi $\underline{v}, \underline{w} \in \mathbb{R}^n$, diremo che $\underline{v} \sim \underline{w}$ sono equivalenti se $\exists \lambda \in \mathbb{R}$ tale che
+    \begin{align}
+        \underline{v} = \lambda \underline{w},
+    \end{align}
+    e diremo che
+    \begin{align}
+        \mathbb{RP}^n = \mathbb{R}^{n+1} \slash \sim.
+    \end{align}
+    Similmente se prendiamo $\mathbb{C}^{n+1}$ e ammettiamo che $\lambda \in \mathbb{C}$, allora diremo che lo spazio proiettivo complesso è
+    \begin{align}
+        \mathbb{CP}^n = \mathbb{C}^{n+1} \slash \sim.
+    \end{align}
+\end{definition}
+
+Possiamo pensare tutti questi bellissimi spazi, in prima battuta, come delle sfere, in quanto preso un vettore $\underline{v} \neq \underline{0}$, allora $2\underline{v}, 3\underline{v}$ e così via, saranno, per la relazione di equivalenza, "collassati" nel medesimo vettore, quindi ciò che sopravvive in questo spazio è la palla unitaria centrata nell'origine (ed è il motivo per cui si "perde" anche una dimensione, fra virgolette): in realtà,
+questo è giusto in parte, perché preso il vettore $\underline{v}$ allora questo sarà equivalente a $-\underline{v}$, quindi ciò che sopravvive in realtà è solo "metà" sfera, definita dalla relazione (d'equivalenza) antipodale per cui
+\begin{align}
+    x \sim -x,
+\end{align} 
+dove con $-x$ si intende il punto \textbf{diametralmente opposto}, non che le sue coordinate vengono moltiplicate per $-1$. Questo fa in modo che la struttura di $\mathbb{RP}^2$ sia peculiare, poiché avendo fatto coincidere i punti antipodali, avremo che questo insieme è topologicamente equivalente a $S^2 \slash \mathbb{Z}_2$, in quanto un cammino chiuso, adesso, è sia un cammino con estremi in $x$ che finisce in $x$ oppure un cammino che va da $x$ a $-x$ (perché la relazione d'equivalenza li ha fatti coincidere). Segue allora che
+\begin{align}
+    \pi_1(\mathbb{RP}^2) = \mathbb{Z}_2,
+\end{align}
+ma si potrebbe mostrare che questo è vero in generale, ovvero
+\begin{align}
+    \pi_1(\mathbb{RP}^n) = \mathbb{Z}_2.
+\end{align}
+Il caso dello spazio proiettivo complesso è più affascinante rispetto a quello reale: infatti, abbiamo che il punto $-z = e^{i\theta} z$, ovvero coincide con il punto $z$ fatto ruotare tramite la moltiplicazione di una fase, ma allora abbiamo che $[z] = [-z]$, dove con $[\cdot]$ si intende la classe di equivalenza; quindi, in questo caso, il quoziente non va a "cucire" niente insieme.
